@@ -1,0 +1,46 @@
+﻿﻿
+@model IEnumerable<Persona>
+@{
+    ViewData["Title"] = "Persona";
+}
+
+<h1>Usuarios</h1>
+<a asp-action="CrearPersona" class="btn btn-primary mb-3">Registrar Usuario</a>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Apellido Paterno</th>
+            <th>Apellido Materno</th>
+            <th>Apellido Edad</th>
+            <th>Acciones</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+        @foreach (var persona in Model)
+        {
+                <tr>
+                <td>
+                    @persona.Nombre 
+                </td>
+                <td>
+                    @persona.ApellidoPaterno  
+                </td>
+                <td>
+                    @persona.ApellidoMaterno
+                </td>
+                <td>
+                    @persona.Edad
+                </td>
+                <td>
+                        <div style="display: flex;">
+                            <a class="btn btn-danger" asp-action="BorrarPersona"  asp-route-id="@persona.Id">Borrar</a>
+                            <a class="btn btn-primary" asp-action="EditarPersona" asp-route-id="@persona.Id" style="margin-right: 5px;">Editar</a>
+                        </div>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>
