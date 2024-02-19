@@ -1,46 +1,56 @@
 ﻿﻿
-@model IEnumerable<Persona>
+@model IEnumerable<NMEX_Manufacturing_KPIs.Models.Module_Inventory.Inventory>
 @{
-    ViewData["Title"] = "Persona";
+    ViewData["Title"] = "Inventory";
 }
 
-<h1>Usuarios</h1>
-<a asp-action="CrearPersona" class="btn btn-primary mb-3">Registrar Usuario</a>
+<div style="display: flex;">
+    <a class="btn btn-primary" asp-action="ManageDevices"  style="margin-right: 5px;">Manage Devices</a>
+    <a class="btn btn-primary" asp-action="ManageVersions"  style="margin-right: 5px;">Manage Versions</a>
+    <a class="btn btn-primary" asp-action="ManageModels"  style="margin-right: 5px;">Manage Models</a>
+    <a class="btn btn-primary" asp-action="Location" style="margin-right: 5px;">Manage Locations</a>
+</div>
+
+<h1 style="margin-top: 25px;">Inventory (Planta Actual)</h1>
+<a asp-action="CrearPersona" class="btn btn-primary mb-3" style="margin-top: 5px;">New record</a>
 <table class="table">
     <thead>
         <tr>
-            <th>Nombre</th>
-            <th>Apellido Paterno</th>
-            <th>Apellido Materno</th>
-            <th>Apellido Edad</th>
-            <th>Acciones</th>
+            <th>#</th>
+            <th>Device Type</th>
+            <th>Modelo</th>
+            <th>Version</th>
+            <th>Location</th>
+            <th>Serial No.</th>
+            <th>Date</th>
+            <th>Accions</th>
         </tr>
 
     </thead>
 
     <tbody>
-        @foreach (var persona in Model)
+       @*  @foreach (var recordInventory in Model)
         {
                 <tr>
                 <td>
-                    @persona.Nombre 
+                   
                 </td>
                 <td>
-                    @persona.ApellidoPaterno  
+                   
                 </td>
                 <td>
-                    @persona.ApellidoMaterno
+                    
                 </td>
                 <td>
-                    @persona.Edad
+                   
                 </td>
                 <td>
                         <div style="display: flex;">
-                            <a class="btn btn-danger" asp-action="BorrarPersona"  asp-route-id="@persona.Id">Borrar</a>
-                            <a class="btn btn-primary" asp-action="EditarPersona" asp-route-id="@persona.Id" style="margin-right: 5px;">Editar</a>
+                            <a class="btn btn-danger" asp-action="BorrarPersona" asp-route-id="" style="margin-right: 5px;">Borrar</a>
+                            <a class="btn btn-primary" asp-action="EditarPersona" asp-route-id="">Editar</a>
                         </div>
                     </td>
                 </tr>
-        }
+        } *@
     </tbody>
 </table>

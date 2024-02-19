@@ -73,3 +73,4 @@ C:\Users\Aaron\source\repos\NMEX Manufacturing KPIs\NMEX Manufacturing KPIs\obj\
 C:\Users\Aaron\source\repos\NMEX Manufacturing KPIs\NMEX Manufacturing KPIs\obj\Debug\net8.0\NMEX Manufacturing KPIs.pdb
 C:\Users\Aaron\source\repos\NMEX Manufacturing KPIs\NMEX Manufacturing KPIs\obj\Debug\net8.0\NMEX Manufacturing KPIs.genruntimeconfig.cache
 C:\Users\Aaron\source\repos\NMEX Manufacturing KPIs\NMEX Manufacturing KPIs\obj\Debug\net8.0\ref\NMEX Manufacturing KPIs.dll
+C:\Users\Aaron\source\repos\NMEX Manufacturing KPIs\NMEX Manufacturing KPIs\obj\Debug\net8.0\NMEX Manufacturing KPIs.sourcelink.json

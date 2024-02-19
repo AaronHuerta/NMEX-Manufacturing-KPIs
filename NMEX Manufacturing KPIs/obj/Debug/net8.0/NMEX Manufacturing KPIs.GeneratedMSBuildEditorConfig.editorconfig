@@ -26,12 +26,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[C:/Users/Aaron/source/repos/NMEX Manufacturing KPIs/NMEX Manufacturing KPIs/Views/Inventory/CrearPersona.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5XENyZWFyUGVyc29uYS5jc2h0bWw=
+[C:/Users/Aaron/source/repos/NMEX Manufacturing KPIs/NMEX Manufacturing KPIs/Views/Inventory/CreateLocation.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5XENyZWF0ZUxvY2F0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Aaron/source/repos/NMEX Manufacturing KPIs/NMEX Manufacturing KPIs/Views/Inventory/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5XEluZGV4LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Aaron/source/repos/NMEX Manufacturing KPIs/NMEX Manufacturing KPIs/Views/Inventory/Location.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5XExvY2F0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Aaron/source/repos/NMEX Manufacturing KPIs/NMEX Manufacturing KPIs/Views/Shared/Error.cshtml]

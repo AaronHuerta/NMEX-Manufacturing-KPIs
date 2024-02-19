@@ -5,6 +5,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddTransient<IRepositorioInventory, RepositorioInventory>();
+builder.Services.AddAutoMapper(typeof(Program));//Configuracion de AutoMapper
 
 var app = builder.Build();
 
