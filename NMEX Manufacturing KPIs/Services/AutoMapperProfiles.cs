@@ -8,9 +8,10 @@ namespace NMEX_Manufacturing_KPIs.Services
     {
         public AutoMapperProfiles() 
         {
+            //Module Inventory
             CreateMap<Location, LocationCreationViewModel>();
 
-
+            //Module Security
 
         }
     }

@@ -1,13 +1,14 @@
 ﻿﻿
 @model NMEX_Manufacturing_KPIs.Models.Module_Inventory.LocationCreationViewModel
 @{
-    ViewData["Title"] = "New Location";
+    ViewData["Title"] = "Edit Location";
 }
 
-<h1>New Location</h1>
+<h1>Edit Location</h1>
 
-<form aps-controller="Inventory" asp-action="CreateLocation">
+<form aps-controller="Inventory" asp-action="EditLocation">
 
+    <input type="hidden" asp-for="Location_id">
     <div class="mb-3">
         <label asp-for="Location_description" class="form-label">Location description</label>
         <input type="text" asp-for="Location_description" class="form-control" />
@@ -18,12 +19,12 @@
         <select asp-for="Plant_id" asp-items="Model.Plants" class="form-select"></select>
         <span asp-validation-for="Plant_id" class="text-danger"></span>
     </div>
-    
+
     <button type="submit" class="btn btn-primary">Send</button>
     <a class="btn btn-secondary" asp-action="Location">Cancel</a>
-   
+
 </form>
 
-@section Scripts{
+@section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Models\Module_Security\" />
     <Folder Include="Models\User\" />
   </ItemGroup>
 
