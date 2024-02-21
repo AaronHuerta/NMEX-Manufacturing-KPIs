@@ -7,17 +7,24 @@ namespace NMEX_Manufacturing_KPIs.Services
 
     public interface IRepositorioInventory
     {
+        Task CreateDeviceType(DeviceType deviceType);
         Task CreateLocation(Location location);
         Task CreateModel(Model model);
+        Task CreateVersion(Models.Module_Inventory.Version version);
         Task DeleteLocation(int Location_Id);
         Task DeleteModel(int Model_id);
+        Task DeleteVersion(int Version_id);
         Task EditLocation(Location location);
         Task EditModel(Model model);
+        Task EditVersion(Models.Module_Inventory.Version version);
         Task<Location> GetByIdLocation(int Location_id);
         Task<Model> GetByIdModel(int Model_id);
+        Task<Models.Module_Inventory.Version> GetByIdVersion(int Version_id);
+        Task<IEnumerable<DeviceType>> GetDevicesTypes();
         Task<IEnumerable<Location>> GetLocations();
         Task<IEnumerable<Model>> GetModels();
         Task<IEnumerable<Plant>> GetPlants();
+        Task<IEnumerable<Models.Module_Inventory.Version>> GetVersions();
     }
 
     public class RepositorioInventory : IRepositorioInventory
@@ -31,7 +38,7 @@ namespace NMEX_Manufacturing_KPIs.Services
 
         //Métodos queries del modulo de Locations ------------------------------------------------------------------------------------------------------------------------------
 
-        //Método para obtener el listado locaciones
+        //Método para obtener el listado locations
         public async Task<IEnumerable<Location>> GetLocations()
         {
             using var connection = new SqlConnection(connectionString);
@@ -144,6 +151,86 @@ namespace NMEX_Manufacturing_KPIs.Services
                                             SET Active='0'
                                             WHERE Model_id = @Model_id", new { Model_id });
         }
+
+
+        //Métodos queries del modulo de Versions ------------------------------------------------------------------------------------------------------------------------------
+
+        //Método para obtener el listado versions
+        public async Task<IEnumerable<Models.Module_Inventory.Version>> GetVersions()
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryAsync<Models.Module_Inventory.Version>(@"SELECT Version_id, Version_description,Active, EndOfSupport
+                                                                                FROM Version
+                                                                                WHERE Active = 1;");
+        }
+
+        //Método para crear un nuevo registro
+        public async Task CreateVersion(Models.Module_Inventory.Version version)
+        {
+            using var connection = new SqlConnection(connectionString);
+            var id = await connection.QuerySingleAsync<int>(@"INSERT INTO Version (Version_description, Active, EndOfSupport)
+                                                              VALUES (@Version_description, '1', @EndOfSupport)
+                                                              SELECT SCOPE_IDENTITY();", version);
+
+            version.Version_id = id;
+        }
+
+
+        //Método para seleccionar ID
+        public async Task<Models.Module_Inventory.Version> GetByIdVersion(int Version_id)
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryFirstOrDefaultAsync<Models.Module_Inventory.Version>(@"SELECT Version_id, Version_description,Active, EndOfSupport
+                                                                                                FROM Version
+                                                                                                WHERE Active = '1' and Version_id = @Version_id;", new { Version_id });
+        }
+
+        //Método para editar registro
+        public async Task EditVersion(Models.Module_Inventory.Version version)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync(@"UPDATE Version
+                                            SET Version_description = @Version_description, EndOfSupport = @EndOfSupport, Active = '1'
+                                            WHERE Version_id = @Version_id;", version);
+
+
+        }
+
+        //Método para actualizar el active a 0 (Borrado Logico)
+        public async Task DeleteVersion(int Version_id)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync(@"UPDATE Version
+                                            SET Active='0'
+                                            WHERE Version_id = @Version_id", new { Version_id });
+        }
+
+        //Métodos queries del modulo de devicesTypes ------------------------------------------------------------------------------------------------------------------------------
+        //Método para obtener el listado models
+        public async Task<IEnumerable<DeviceType>> GetDevicesTypes()
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryAsync<DeviceType>(@"SELECT D_type_id, D_type_description, Active
+                                                            FROM DeviceType
+                                                            WHERE Active = 1;");
+        }
+
+
+        //Método para crear un nuevo registro
+        public async Task CreateDeviceType(DeviceType deviceType)
+        {
+            using var connection = new SqlConnection(connectionString);
+            var id = await connection.QuerySingleAsync<int>(@"INSERT INTO DeviceType (D_type_description, Active)
+                                                              VALUES (@D_type_description, '1')
+                                                              SELECT SCOPE_IDENTITY();", deviceType);
+
+            deviceType.D_type_id = id;
+        }
+
+
+
+
+
 
 
         //Métodos queries del modulo de Plants ------------------------------------------------------------------------------------------------------------------------------

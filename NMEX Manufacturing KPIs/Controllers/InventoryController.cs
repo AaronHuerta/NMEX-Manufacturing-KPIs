@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NMEX_Manufacturing_KPIs.Models.Module_Inventory;
 using NMEX_Manufacturing_KPIs.Services;
+using System.ComponentModel;
 
 namespace NMEX_Manufacturing_KPIs.Controllers
 {
@@ -248,6 +249,160 @@ namespace NMEX_Manufacturing_KPIs.Controllers
             {
                 Console.WriteLine(ex.Message);
                 return RedirectToAction(nameof(Model));
+            }
+        }
+
+        //Version Accions --------------------------------------------------------------
+        [HttpGet]
+        public async Task<IActionResult> Version()
+        {
+            try
+            {
+                var versions = await repositorioInventory.GetVersions();
+                return View(versions);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        [HttpGet]
+        public IActionResult CreateVersion()
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Version));
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateVersion(Models.Module_Inventory.Version version)
+        {
+            try
+            {
+                await repositorioInventory.CreateVersion(version);
+                return RedirectToAction(nameof(Version));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Version));
+            }
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditVersion(int id)
+        {
+            try
+            {
+                var version = await repositorioInventory.GetByIdVersion(id);
+
+                return View(version);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Version));
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditVersion(Models.Module_Inventory.Version version)
+        {
+            try
+            {
+                await repositorioInventory.EditVersion(version);
+                return RedirectToAction(nameof(Version));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Version));
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteVersion(int id)
+        {
+            try
+            {
+                var version = await repositorioInventory.GetByIdVersion(id);
+
+                return View(version);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Version));
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteRecordVersion(int Version_id)
+        {
+            try
+            {
+                await repositorioInventory.DeleteVersion(Version_id);
+
+                return RedirectToAction(nameof(Version));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Version));
+            }
+        }
+
+        //Version DeviceType --------------------------------------------------------------
+        [HttpGet]
+        public async Task<IActionResult> DeviceType()
+        {
+            try
+            {
+                var devicesTypes = await repositorioInventory.GetDevicesTypes();
+                return View(devicesTypes);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        [HttpGet]
+        public IActionResult CreateDeviceType()
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(DeviceType));
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateDeviceType(DeviceType deviceType)
+        {
+            try
+            {
+                await repositorioInventory.CreateDeviceType(deviceType);
+                return RedirectToAction(nameof(DeviceType));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(DeviceType));
             }
         }
 

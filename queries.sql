@@ -39,9 +39,7 @@ DELETE Location
 WHERE Location_id <11 and Location_id >6
 
 
-
 --Queries Models
-
 SELECT Model_id, Model_description, Active
 FROM Model
 Where Active = 1
@@ -59,3 +57,32 @@ VALUES ('HP PROBOOK', 1)
 UPDATE Model
 SET Model_description = 'Prueba', Active = '1'
 WHERE Model_id = 1;
+
+--Queries Versions
+
+SELECT Version_id, Version_description,Active, EndOfSupport
+FROM Version
+WHERE Active = 1;
+
+SELECT Version_id, Version_description,Active, EndOfSupport
+FROM Version
+WHERE Version_id = 1;
+
+INSERT INTO Version (Version_description, Active, EndOfSupport)
+VALUES ('Prueba', 1, '2024-02-13')
+
+--UPDATE Version
+--SET Version_description = @Version_description,EndOfSupport = @EndOfSupport, Active = '1'
+--WHERE Version_id = @Version_id;
+
+--Queries DivicesTypes
+
+SELECT*
+FROM DeviceType
+
+SELECT D_type_id, D_type_description, Active
+FROM DeviceType
+WHERE Active = 1;
+
+INSERT INTO DeviceType (D_type_description, Active)
+VALUES ('Prueba Divece Type', 1)
