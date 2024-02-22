@@ -2,6 +2,7 @@
 @model IEnumerable<NMEX_Manufacturing_KPIs.Models.Module_Inventory.Inventory>
 @{
     ViewData["Title"] = "Inventory";
+    int i = 1;
 }
 
 <div style="display: flex;">
@@ -12,44 +13,54 @@
 </div>
 
 <h1 style="margin-top: 25px;">Inventory (Planta Actual)</h1>
-<a asp-action="CrearPersona" class="btn btn-primary mb-3" style="margin-top: 5px;">New record</a>
+<a asp-action="CreateInventoryRecord" class="btn btn-primary mb-3" style="margin-top: 5px;">New record</a>
 <table class="table">
     <thead>
         <tr>
             <th>#</th>
             <th>Device Type</th>
-            <th>Modelo</th>
-            <th>Version</th>
-            <th>Location</th>
             <th>Serial No.</th>
-            <th>Date</th>
+            <th>Purchase Date</th>
+            <th>Location</th>
+            <th>Version</th>
+            <th>Model</th>
             <th>Accions</th>
         </tr>
     </thead>
 
     <tbody>
-       @*  @foreach (var recordInventory in Model)
+        @foreach (var recordInventory in Model)
         {
                 <tr>
-                <td>
-                   
-                </td>
-                <td>
-                   
-                </td>
-                <td>
-                    
-                </td>
-                <td>
-                   
-                </td>
-                <td>
+                    <td>
+                        @i
+                    </td>
+                    <td>
+                       @recordInventory.DeviceType
+                    </td>
+                    <td>
+                        @recordInventory.SerialNo
+                    </td>
+                    <td>
+                        @recordInventory.PurchaseDate
+                    </td>
+                    <td>
+                        @recordInventory.Location
+                    </td>
+                    <td>
+                        @recordInventory.Version
+                    </td>
+                    <td>
+                        @recordInventory.Model
+                    </td>
+                    <td>
                         <div style="display: flex;">
-                            <a class="btn btn-danger" asp-action="BorrarPersona" asp-route-id="" style="margin-right: 5px;">Borrar</a>
-                            <a class="btn btn-primary" asp-action="EditarPersona" asp-route-id="">Editar</a>
+                            <a class="btn btn-danger" asp-action="DeleteRecordInventory" asp-route-id="" style="margin-right: 5px;">Delete</a>
+                            <a class="btn btn-primary" asp-action="UpdateRecordInventory" asp-route-id="">Edit</a>
                         </div>
                     </td>
                 </tr>
-        } *@
+            i++;
+        }
     </tbody>
 </table>

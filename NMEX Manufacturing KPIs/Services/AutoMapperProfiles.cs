@@ -10,6 +10,7 @@ namespace NMEX_Manufacturing_KPIs.Services
         {
             //Module Inventory
             CreateMap<Location, LocationCreationViewModel>();
+            CreateMap<Inventory, InventoryCreationViewModel>();
 
             //Module Security
 

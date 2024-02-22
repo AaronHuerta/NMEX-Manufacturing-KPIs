@@ -21,8 +21,79 @@ namespace NMEX_Manufacturing_KPIs.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            try
+            {
+                var inventoryRecords = await repositorioInventory.GetInventoryRecords();
+                return View(inventoryRecords);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Index));
+            }
+        }
 
-            return View();
+        [HttpGet]
+        public async Task<IActionResult> CreateInventoryRecord()
+        {
+            try
+            {
+                var model = new InventoryCreationViewModel();
+                model.DeviceTypes = await GetDevicesTypes();
+                model.Versions = await GetVersions();
+                model.Models = await GetModels();
+                model.Locations = await GetLocations();
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> CreateInventoryRecord(InventoryCreationViewModel inventoryRecord)
+        {
+            try
+            {
+                await repositorioInventory.CreateInventoryRecord(inventoryRecord);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        [HttpGet]
+        private async Task<IEnumerable<SelectListItem>> GetDevicesTypes()
+        {
+            var devicesTypes = await repositorioInventory.GetDevicesTypes();
+            return devicesTypes.Select(x => new SelectListItem(x.D_type_description, x.D_type_id.ToString()));
+        }
+
+        [HttpGet]
+        private async Task<IEnumerable<SelectListItem>> GetVersions()
+        {
+            var versions = await repositorioInventory.GetVersions();
+            return versions.Select(x => new SelectListItem(x.Version_description, x.Version_id.ToString()));
+        }
+
+        [HttpGet]
+        private async Task<IEnumerable<SelectListItem>> GetModels()
+        {
+            var models = await repositorioInventory.GetModels();
+            return models.Select(x => new SelectListItem(x.Model_description, x.Model_id.ToString()));
+        }
+
+        [HttpGet]
+        private async Task<IEnumerable<SelectListItem>> GetLocations()
+        {
+            var locations = await repositorioInventory.GetLocations();
+            return locations.Select(x => new SelectListItem(x.Location_description, x.Location_id.ToString()));
         }
 
         //Location Accions -----------------------------------------------------------
@@ -361,7 +432,7 @@ namespace NMEX_Manufacturing_KPIs.Controllers
             }
         }
 
-        //Version DeviceType --------------------------------------------------------------
+        //DeviceType Accions --------------------------------------------------------------
         [HttpGet]
         public async Task<IActionResult> DeviceType()
         {
@@ -405,6 +476,73 @@ namespace NMEX_Manufacturing_KPIs.Controllers
                 return RedirectToAction(nameof(DeviceType));
             }
         }
+
+
+        [HttpGet]
+        public async Task<IActionResult> EditDeviceType(int id)
+        {
+            try
+            {
+                var deviceType = await repositorioInventory.GetByIdDeviceType(id);
+
+                return View(deviceType);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(DeviceType));
+            }
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> EditDeviceType(DeviceType deviceType)
+        {
+            try
+            {
+                await repositorioInventory.EditDeviceType(deviceType);
+                return RedirectToAction(nameof(DeviceType));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(DeviceType));
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteDeviceType(int id)
+        {
+            try
+            {
+                var deviceType = await repositorioInventory.GetByIdDeviceType(id);
+
+                return View(deviceType);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(DeviceType));
+            }
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteRecordDeviceType(int D_type_id)
+        {
+            try
+            {
+                await repositorioInventory.DeleteDeviceType(D_type_id);
+
+                return RedirectToAction(nameof(DeviceType));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(DeviceType));
+            }
+        }
+
 
         //Plant Accions --------------------------------------------------------------
         [HttpGet]

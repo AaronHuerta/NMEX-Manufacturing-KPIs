@@ -8,19 +8,24 @@ namespace NMEX_Manufacturing_KPIs.Services
     public interface IRepositorioInventory
     {
         Task CreateDeviceType(DeviceType deviceType);
+        Task CreateInventoryRecord(InventoryCreationViewModel inventoryRecord);
         Task CreateLocation(Location location);
         Task CreateModel(Model model);
         Task CreateVersion(Models.Module_Inventory.Version version);
+        Task DeleteDeviceType(int D_type_id);
         Task DeleteLocation(int Location_Id);
         Task DeleteModel(int Model_id);
         Task DeleteVersion(int Version_id);
+        Task EditDeviceType(DeviceType deviceType);
         Task EditLocation(Location location);
         Task EditModel(Model model);
         Task EditVersion(Models.Module_Inventory.Version version);
+        Task<DeviceType> GetByIdDeviceType(int D_type_id);
         Task<Location> GetByIdLocation(int Location_id);
         Task<Model> GetByIdModel(int Model_id);
         Task<Models.Module_Inventory.Version> GetByIdVersion(int Version_id);
         Task<IEnumerable<DeviceType>> GetDevicesTypes();
+        Task<IEnumerable<Inventory>> GetInventoryRecords();
         Task<IEnumerable<Location>> GetLocations();
         Task<IEnumerable<Model>> GetModels();
         Task<IEnumerable<Plant>> GetPlants();
@@ -35,6 +40,40 @@ namespace NMEX_Manufacturing_KPIs.Services
         {
             connectionString = configuration.GetConnectionString("DefaultConnection");
         }
+
+        //Métodos queries del modulo de Inventario ------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+        //Método para crear un nuevo registro
+        public async Task CreateInventoryRecord(InventoryCreationViewModel inventoryRecord)
+        {
+            using var connection = new SqlConnection(connectionString);
+            var id = await connection.QuerySingleAsync<int>(@"INSERT INTO Inventory (D_type_id, SerialNo, PurchaseDate, Location_id, Version_id, Model_id, Active)
+                                                             VALUES (@D_type_id,@SerialNo, @PurchaseDate, @Location_id, @Version_id, @Model_id, '1')
+                                                              SELECT SCOPE_IDENTITY();", inventoryRecord);
+
+            inventoryRecord.Inventory_Id = id;
+        }
+
+        //Método para obtener el listado locations
+        public async Task<IEnumerable<Inventory>> GetInventoryRecords()
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryAsync<Inventory>(@"SELECT I.Inventory_id, DT.D_type_description AS DeviceType, I.SerialNo, I.PurchaseDate, L.Location_description AS Location, V.Version_description AS Version, M.Model_description AS Model, I.Active
+                                                        FROM Inventory AS I inner join DeviceType AS DT 
+                                                        ON I.D_type_id = DT.D_type_id inner join Version AS V
+                                                        ON V.Version_id = I.Version_id inner join Model AS M
+                                                        ON M.Model_id = I.Inventory_id inner join Location AS L
+                                                        ON L.Location_id = I.Location_id");
+        }
+
+
+
+
+
+
 
         //Métodos queries del modulo de Locations ------------------------------------------------------------------------------------------------------------------------------
 
@@ -228,10 +267,34 @@ namespace NMEX_Manufacturing_KPIs.Services
         }
 
 
+        //Método para seleccionar ID
+        public async Task<DeviceType> GetByIdDeviceType(int D_type_id)
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryFirstOrDefaultAsync<DeviceType>(@"SELECT D_type_id, D_type_description, Active
+                                                                            FROM DeviceType
+                                                                            WHERE Active = 1 and D_type_id = @D_type_id;", new { D_type_id });
+        }
+
+        //Método para editar registro
+        public async Task EditDeviceType(DeviceType deviceType)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync(@"UPDATE DeviceType
+                                            SET D_type_description = @D_type_description, Active = '1'
+                                            WHERE D_type_id = @D_type_id;", deviceType);
 
 
+        }
 
-
+        //Método para actualizar el active a 0 (Borrado Logico)
+        public async Task DeleteDeviceType(int D_type_id)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync(@"UPDATE DeviceType
+                                            SET Active='0'
+                                            WHERE D_type_id = @D_type_id", new { D_type_id });
+        }
 
         //Métodos queries del modulo de Plants ------------------------------------------------------------------------------------------------------------------------------
         //Método para obtener el listado de plantas

@@ -30,6 +30,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5XENyZWF0ZURldmljZVR5cGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Aaron/source/repos/NMEX Manufacturing KPIs/NMEX Manufacturing KPIs/Views/Inventory/CreateInventoryRecord.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5XENyZWF0ZUludmVudG9yeVJlY29yZC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Aaron/source/repos/NMEX Manufacturing KPIs/NMEX Manufacturing KPIs/Views/Inventory/CreateLocation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5XENyZWF0ZUxvY2F0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -40,6 +44,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Aaron/source/repos/NMEX Manufacturing KPIs/NMEX Manufacturing KPIs/Views/Inventory/CreateVersion.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5XENyZWF0ZVZlcnNpb24uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Aaron/source/repos/NMEX Manufacturing KPIs/NMEX Manufacturing KPIs/Views/Inventory/DeleteDeviceType.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5XERlbGV0ZURldmljZVR5cGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Aaron/source/repos/NMEX Manufacturing KPIs/NMEX Manufacturing KPIs/Views/Inventory/DeleteLocation.cshtml]
@@ -56,6 +64,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Aaron/source/repos/NMEX Manufacturing KPIs/NMEX Manufacturing KPIs/Views/Inventory/DeviceType.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5XERldmljZVR5cGUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Aaron/source/repos/NMEX Manufacturing KPIs/NMEX Manufacturing KPIs/Views/Inventory/EditDeviceType.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5XEVkaXREZXZpY2VUeXBlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Aaron/source/repos/NMEX Manufacturing KPIs/NMEX Manufacturing KPIs/Views/Inventory/EditLocation.cshtml]

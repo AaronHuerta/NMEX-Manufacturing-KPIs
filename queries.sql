@@ -86,3 +86,19 @@ WHERE Active = 1;
 
 INSERT INTO DeviceType (D_type_description, Active)
 VALUES ('Prueba Divece Type', 1)
+
+UPDATE DeviceType
+SET D_type_description = 'Editado', Active = '1'
+WHERE D_type_id = 0;
+
+--Queries DivicesTypes
+SELECT*
+FROM Inventory
+
+
+SELECT I.Inventory_id, DT.D_type_description AS DeviceType, I.SerialNo, I.PurchaseDate, L.Location_description AS Location, V.Version_description AS Version, M.Model_description AS Model, I.Active
+FROM Inventory AS I inner join DeviceType AS DT 
+ON I.D_type_id = DT.D_type_id inner join Version AS V
+ON V.Version_id = I.Version_id inner join Model AS M
+ON M.Model_id = I.Inventory_id inner join Location AS L
+ON L.Location_id = I.Location_id
