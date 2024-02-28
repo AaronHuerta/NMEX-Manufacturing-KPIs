@@ -13,14 +13,17 @@ namespace NMEX_Manufacturing_KPIs.Services
         Task CreateModel(Model model);
         Task CreateVersion(Models.Module_Inventory.Version version);
         Task DeleteDeviceType(int D_type_id);
+        Task DeleteInventoryRecord(int Inventory_id);
         Task DeleteLocation(int Location_Id);
         Task DeleteModel(int Model_id);
         Task DeleteVersion(int Version_id);
         Task EditDeviceType(DeviceType deviceType);
+        Task EditInventoryRecord(InventoryCreationViewModel inventoryRecord);
         Task EditLocation(Location location);
         Task EditModel(Model model);
         Task EditVersion(Models.Module_Inventory.Version version);
         Task<DeviceType> GetByIdDeviceType(int D_type_id);
+        Task<Inventory> GetByIdInventoryRecord(int Inventory_id);
         Task<Location> GetByIdLocation(int Location_id);
         Task<Model> GetByIdModel(int Model_id);
         Task<Models.Module_Inventory.Version> GetByIdVersion(int Version_id);
@@ -61,19 +64,51 @@ namespace NMEX_Manufacturing_KPIs.Services
         public async Task<IEnumerable<Inventory>> GetInventoryRecords()
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryAsync<Inventory>(@"SELECT I.Inventory_id, DT.D_type_description AS DeviceType, I.SerialNo, I.PurchaseDate, L.Location_description AS Location, V.Version_description AS Version, M.Model_description AS Model, I.Active
-                                                        FROM Inventory AS I inner join DeviceType AS DT 
-                                                        ON I.D_type_id = DT.D_type_id inner join Version AS V
-                                                        ON V.Version_id = I.Version_id inner join Model AS M
-                                                        ON M.Model_id = I.Inventory_id inner join Location AS L
-                                                        ON L.Location_id = I.Location_id");
+            return await connection.QueryAsync<Inventory>(@"SELECT I.Inventory_id,I.D_type_id, I.Location_id, I.Version_id, I.Model_id, DT.D_type_description AS DeviceType, I.SerialNo, I.PurchaseDate, L.Location_description AS Location, V.Version_description AS Version, M.Model_description AS Model, I.Active
+                                                            FROM Inventory AS I inner join DeviceType AS DT 
+                                                            ON I.D_type_id = DT.D_type_id inner join Version AS V
+                                                            ON V.Version_id = I.Version_id inner join Model AS M
+                                                            ON M.Model_id = I.Model_id inner join Location AS L
+                                                            ON L.Location_id = I.Location_id
+                                                            WHERE I.Active=1");
         }
 
 
+        //Método para seleccionar ID
+        public async Task<Inventory> GetByIdInventoryRecord(int Inventory_id)
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryFirstOrDefaultAsync<Inventory>(@"SELECT I.Inventory_id,I.D_type_id, I.Location_id, I.Version_id, I.Model_id, DT.D_type_description AS DeviceType, I.SerialNo, I.PurchaseDate, L.Location_description AS Location, V.Version_description AS Version, M.Model_description AS Model, I.Active
+                                                                        FROM Inventory AS I inner join DeviceType AS DT 
+                                                                        ON I.D_type_id = DT.D_type_id inner join Version AS V
+                                                                        ON V.Version_id = I.Version_id inner join Model AS M
+                                                                        ON M.Model_id = I.Model_id inner join Location AS L
+                                                                        ON L.Location_id = I.Location_id
+                                                                        WHERE I.Active=1 and I.Inventory_id = @Inventory_id", new { Inventory_id });
 
 
+        }
+
+        //Método para editar registro
+        public async Task EditInventoryRecord(InventoryCreationViewModel inventoryRecord)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync(@"UPDATE Inventory
+                                            SET D_type_id = @D_type_id, SerialNo = @SerialNo, PurchaseDate = @PurchaseDate, Location_id = @Location_id, Version_id = @Version_id, Model_id = @Model_id, Active = '1'
+                                            WHERE Inventory_id = @Inventory_id;", inventoryRecord);
+        }
 
 
+        //Método para actualizar el active a 0 (Borrado Logico)
+        public async Task DeleteInventoryRecord(int Inventory_id)
+        {
+            using var connection = new SqlConnection(connectionString);
+            await connection.ExecuteAsync(@"UPDATE Inventory
+                                            SET Active='0'
+                                            WHERE Inventory_id = @Inventory_id", new { Inventory_id });
+
+
+        }
 
         //Métodos queries del modulo de Locations ------------------------------------------------------------------------------------------------------------------------------
 

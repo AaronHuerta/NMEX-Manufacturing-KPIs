@@ -68,6 +68,77 @@ namespace NMEX_Manufacturing_KPIs.Controllers
             }
         }
 
+
+        [HttpGet]
+        public async Task<IActionResult> EditInventoryRecord(int id)
+        {
+            try
+            {
+                var inventoryRecord = await repositorioInventory.GetByIdInventoryRecord(id);
+                var model = mapper.Map<InventoryCreationViewModel>(inventoryRecord);
+                
+                model.DeviceTypes = await GetDevicesTypes();
+                model.Versions = await GetVersions();
+                model.Models = await GetModels();
+                model.Locations = await GetLocations();
+
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditInventoryRecord(InventoryCreationViewModel inventoryRecord)
+        {
+            try
+            {
+                await repositorioInventory.EditInventoryRecord(inventoryRecord);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> DeleteInventory(int id)
+        {
+            try
+            {
+                var inventoryRecord = await repositorioInventory.GetByIdInventoryRecord(id);
+
+                return View(inventoryRecord);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DeleteInventoryRecord(int Inventory_id)
+        {
+            try
+            {
+                await repositorioInventory.DeleteInventoryRecord(Inventory_id);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
         [HttpGet]
         private async Task<IEnumerable<SelectListItem>> GetDevicesTypes()
         {

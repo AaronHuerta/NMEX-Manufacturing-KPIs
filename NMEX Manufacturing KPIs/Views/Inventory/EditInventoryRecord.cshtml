@@ -8,6 +8,7 @@
 
 <form aps-controller="Inventory" asp-action="CreateInventoryRecord">
 
+    <input type="hidden" asp-for="Inventory_Id">
     <div class="mb-3">
         <label asp-for="SerialNo" class="form-label">Serial No</label>
         <input type="text" asp-for="SerialNo" class="form-control" />
@@ -35,7 +36,7 @@
     </div>
     <div class="mb-3">
         <label asp-for="PurchaseDate">Purchase Date</label>
-        <input type="date" asp-for="PurchaseDate" class="form-control" value="" />
+        <input type="date" asp-for="PurchaseDate" class="form-control"/>
         <span asp-validation-for="PurchaseDate" class="text-danger"></span>
     </div>
 

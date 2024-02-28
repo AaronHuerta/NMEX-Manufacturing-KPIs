@@ -18,12 +18,12 @@
     <thead>
         <tr>
             <th>#</th>
-            <th>Device Type</th>
             <th>Serial No.</th>
-            <th>Purchase Date</th>
-            <th>Location</th>
-            <th>Version</th>
+            <th>Device Type</th>
             <th>Model</th>
+            <th>Version</th>
+            <th>Location</th>
+            <th>Purchase Date</th>
             <th>Accions</th>
         </tr>
     </thead>
@@ -36,27 +36,27 @@
                         @i
                     </td>
                     <td>
-                       @recordInventory.DeviceType
-                    </td>
-                    <td>
                         @recordInventory.SerialNo
                     </td>
                     <td>
-                        @recordInventory.PurchaseDate
-                    </td>
-                    <td>
-                        @recordInventory.Location
-                    </td>
-                    <td>
-                        @recordInventory.Version
+                       @recordInventory.DeviceType
                     </td>
                     <td>
                         @recordInventory.Model
                     </td>
                     <td>
+                        @recordInventory.Version
+                    </td>
+                    <td>
+                        @recordInventory.Location
+                    </td>
+                    <td>
+                        @recordInventory.PurchaseDate
+                    </td>
+                    <td>
                         <div style="display: flex;">
-                            <a class="btn btn-danger" asp-action="DeleteRecordInventory" asp-route-id="" style="margin-right: 5px;">Delete</a>
-                            <a class="btn btn-primary" asp-action="UpdateRecordInventory" asp-route-id="">Edit</a>
+                            <a class="btn btn-danger" asp-action="DeleteInventory" asp-route-id="@recordInventory.Inventory_Id" style="margin-right: 5px;">Delete</a>
+                            <a class="btn btn-primary" asp-action="EditInventoryRecord" asp-route-id="@recordInventory.Inventory_Id">Edit</a>
                         </div>
                     </td>
                 </tr>

@@ -50,6 +50,10 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5XERlbGV0ZURldmljZVR5cGUuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/Aaron/source/repos/NMEX Manufacturing KPIs/NMEX Manufacturing KPIs/Views/Inventory/DeleteInventory.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5XERlbGV0ZUludmVudG9yeS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/Aaron/source/repos/NMEX Manufacturing KPIs/NMEX Manufacturing KPIs/Views/Inventory/DeleteLocation.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5XERlbGV0ZUxvY2F0aW9uLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
@@ -68,6 +72,10 @@ build_metadata.AdditionalFiles.CssScope =
 
 [C:/Users/Aaron/source/repos/NMEX Manufacturing KPIs/NMEX Manufacturing KPIs/Views/Inventory/EditDeviceType.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5XEVkaXREZXZpY2VUeXBlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/Aaron/source/repos/NMEX Manufacturing KPIs/NMEX Manufacturing KPIs/Views/Inventory/EditInventoryRecord.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSW52ZW50b3J5XEVkaXRJbnZlbnRvcnlSZWNvcmQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/Aaron/source/repos/NMEX Manufacturing KPIs/NMEX Manufacturing KPIs/Views/Inventory/EditLocation.cshtml]

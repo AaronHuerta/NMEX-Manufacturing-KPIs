@@ -92,13 +92,26 @@ SET D_type_description = 'Editado', Active = '1'
 WHERE D_type_id = 0;
 
 --Queries DivicesTypes
-SELECT*
-FROM Inventory
 
 
-SELECT I.Inventory_id, DT.D_type_description AS DeviceType, I.SerialNo, I.PurchaseDate, L.Location_description AS Location, V.Version_description AS Version, M.Model_description AS Model, I.Active
+
+SELECT I.Inventory_id,I.D_type_id, I.Location_id, I.Version_id, I.Model_id, DT.D_type_description AS DeviceType, I.SerialNo, I.PurchaseDate, L.Location_description AS Location, V.Version_description AS Version, M.Model_description AS Model, I.Active
 FROM Inventory AS I inner join DeviceType AS DT 
 ON I.D_type_id = DT.D_type_id inner join Version AS V
 ON V.Version_id = I.Version_id inner join Model AS M
-ON M.Model_id = I.Inventory_id inner join Location AS L
+ON M.Model_id = I.Model_id inner join Location AS L
 ON L.Location_id = I.Location_id
+WHERE I.Inventory_id = 1010
+
+
+INSERT INTO Inventory (D_type_id, SerialNo, PurchaseDate, Location_id, Version_id, Model_id, Active)
+VALUES (1,'2432', '2024-02-13', 1, 1, 1, '1')
+SELECT SCOPE_IDENTITY();
+
+
+SELECT*
+FROM Inventory
+
+--UPDATE Inventory
+--SET D_type_id = @D_type_id, SerialNo = @SerialNo, PurchaseDate = @PurchaseDate, Location_id = @Location_id, Version_id = @Version_id, Model_id = @Model_id, Active = '1'
+--WHERE Inventory_id = @Inventory_id;
