@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using ClosedXML.Excel;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using NMEX_Manufacturing_KPIs.Models.Module_Inventory;
@@ -19,12 +20,19 @@ namespace NMEX_Manufacturing_KPIs.Controllers
 
         //Inventory Accions -----------------------------------------------------------
         [HttpGet]
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int plantFilter = 0)
         {
             try
             {
-                var inventoryRecords = await repositorioInventory.GetInventoryRecords();
-                return View(inventoryRecords);
+                //Logica del filtro de inventory records
+                if(plantFilter== 0)
+                {
+                    var inventoryRecords = await repositorioInventory.GetInventoryRecords();
+                    return View(inventoryRecords);
+                }
+
+                var inventoryRecordsFilter = await repositorioInventory.GetInventoryRecordsFilter(plantFilter);
+                return View(inventoryRecordsFilter);
             }
             catch (Exception ex)
             {
@@ -58,6 +66,9 @@ namespace NMEX_Manufacturing_KPIs.Controllers
         {
             try
             {
+                var location = await repositorioInventory.GetByIdLocation(inventoryRecord.Location_id);
+                inventoryRecord.PlantRecord=location.Plant;
+
                 await repositorioInventory.CreateInventoryRecord(inventoryRecord);
                 return RedirectToAction(nameof(Index));
             }
@@ -96,6 +107,9 @@ namespace NMEX_Manufacturing_KPIs.Controllers
         {
             try
             {
+                var location = await repositorioInventory.GetByIdLocation(inventoryRecord.Location_id);
+                inventoryRecord.PlantRecord = location.Plant;
+
                 await repositorioInventory.EditInventoryRecord(inventoryRecord);
                 return RedirectToAction(nameof(Index));
             }
@@ -131,6 +145,161 @@ namespace NMEX_Manufacturing_KPIs.Controllers
                 await repositorioInventory.DeleteInventoryRecord(Inventory_id);
 
                 return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+
+        [HttpGet]
+        public async Task<IActionResult> FilterByPlant()
+        {
+            try
+            {
+                var model = new InventoryCreationViewModel();
+                model.Plants = await GetPlants();
+                return View(model);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> FilterByPlant(InventoryCreationViewModel plantFilter)
+        {
+            try
+            {
+
+                var plantRecord = await repositorioInventory.GetByIdPlant(plantFilter.Plant_id);
+                return RedirectToAction(nameof(Index), new { plantFilter = plantRecord.Plant_id });
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+
+
+        [HttpGet]
+        public IActionResult InventoryRecordExcel()
+        {
+            try
+            {
+                return View();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return RedirectToAction(nameof(Index));
+            }
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> InventoryRecordExcel(IFormFile excelFile)
+        {
+            try
+            {
+                if (excelFile == null || excelFile.Length == 0)
+                {
+                    // Manejar el caso en que no se ha seleccionado ningún archivo
+                    return RedirectToAction(nameof(Index));
+                }
+
+                using (var stream = new MemoryStream())
+                {
+                    await excelFile.CopyToAsync(stream);
+                    using (var workbook = new XLWorkbook(stream))
+                    {
+                        var worksheet = workbook.Worksheet(1);
+
+                        var firstRowUsed = worksheet.FirstRowUsed();
+                        var lastRowUsed = worksheet.LastRowUsed();
+
+                        for (int rowNum = 2; rowNum <= lastRowUsed.RowNumber(); rowNum++)
+                        {
+                            var inventoryRecord = new Dictionary<string, object>();
+
+
+                            for (int colNum = 2; colNum <= 8; colNum++) // Columnas de la B a la H
+                            {
+                                //Console.WriteLine(worksheet.Cell(rowNum, colNum).Value);
+
+                                if(colNum == 2)
+                                {
+                                    inventoryRecord.Add("Serial No.", worksheet.Cell(rowNum, colNum).Value);
+                                }
+
+                                if(colNum == 3)
+                                {
+                                    var deviceType = new DeviceType();
+                                    deviceType.D_type_description = (string)worksheet.Cell(rowNum, colNum).Value;
+
+                                    await repositorioInventory.CreateDeviceType(deviceType);
+                                    inventoryRecord.Add("Device Type", deviceType.D_type_id);
+                                }
+
+                                if (colNum == 4)
+                                {
+                                    var model = new Model();
+                                    model.Model_description = (string)worksheet.Cell(rowNum, colNum).Value;
+
+                                    await repositorioInventory.CreateModel(model);
+                                    inventoryRecord.Add("Model", model.Model_id);
+                                }
+
+                                if (colNum == 5)
+                                {
+                                    var version = new Models.Module_Inventory.Version();
+                                    version.Version_description = (string)worksheet.Cell(rowNum, colNum).Value;
+                                    version.EndOfSupport = null;
+
+                                    await repositorioInventory.CreateVersion(version);
+                                    inventoryRecord.Add("Version", version.Version_id);
+                                }
+
+                                if (colNum == 6)
+                                {
+                                    var location = new Location();
+                                    location.Location_description = (string)worksheet.Cell(rowNum, colNum).Value;
+
+                                    var plant_id = await repositorioInventory.GetByDescriptionPlant((string)worksheet.Cell(rowNum, colNum+1).Value);
+                                    location.Plant_id = plant_id;
+                                    await repositorioInventory.CreateLocation(location);
+                                    inventoryRecord.Add("Location", location.Location_id);
+                                }
+                                if (colNum == 8)
+                                {
+                                    inventoryRecord.Add("Purchase Date", worksheet.Cell(rowNum, colNum).Value);
+                                }
+                            }
+
+                            //Console.WriteLine(inventoryRecord);
+                            var inventoryRecords = new InventoryCreationViewModel();
+                            inventoryRecords.SerialNo = inventoryRecord["Serial No."].ToString();
+                            inventoryRecords.D_type_id = (int)inventoryRecord["Device Type"];
+                            inventoryRecords.Model_id = (int)inventoryRecord["Model"];
+                            inventoryRecords.Version_id = (int)inventoryRecord["Version"];
+                            inventoryRecords.Location_id = (int)inventoryRecord["Location"];
+                            inventoryRecords.PurchaseDate = inventoryRecord["Purchase Date"].ToString();
+                            await repositorioInventory.CreateInventoryRecord(inventoryRecords);
+                            
+                        }
+                        
+                    }
+                }
+                // Redirigir a una acción de éxito o a donde sea necesario
+                return RedirectToAction(nameof(Index));
+
             }
             catch (Exception ex)
             {
@@ -240,6 +409,23 @@ namespace NMEX_Manufacturing_KPIs.Controllers
         {
             try
             {
+                ////Modificacion de planta para registros de inventario
+                //var oldLocationRecord = await repositorioInventory.GetByIdLocation(location.Location_id);
+
+                //if(location.Plant_id != oldLocationRecord.Plant_id)
+                //{
+                //    var inventoryRecords = await repositorioInventory.ByLocationGetInventoryRecords(location.Location_id);
+                //    var plant = await repositorioInventory.GetByIdPlant(location.Plant_id);
+
+                //    if (inventoryRecords != null)//No se puede asignar count por que es un conjunto de metodos
+                //    {
+                //        foreach (var record in inventoryRecords)
+                //        {
+                //            await repositorioInventory.EditInventoryRecordLocation(record.Inventory_Id, plant.Plant_description);
+                //        }
+                //    }
+                //}
+             
                 await repositorioInventory.EditLocation(location);
                 return RedirectToAction(nameof(Location));
             }

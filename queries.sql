@@ -12,6 +12,17 @@ SELECT*
 FROM Plant
 
 
+SELECT Plant_id, Plant_description, Active
+FROM Plant
+WHERE Plant_id = 1009
+
+SELECT Plant_id
+FROM Plant
+WHERE Plant_description = 'A1'
+
+
+
+
 --Queries Location
 INSERT INTO Location(Location_description, Plant_id, Active)
 VALUES ('Trim B&K', 1, 1), ('Estampado rollos', 1, 1), ('Pintura', 2, 1)
@@ -58,6 +69,7 @@ UPDATE Model
 SET Model_description = 'Prueba', Active = '1'
 WHERE Model_id = 1;
 
+DELETE Model
 --Queries Versions
 
 SELECT Version_id, Version_description,Active, EndOfSupport
@@ -75,6 +87,7 @@ VALUES ('Prueba', 1, '2024-02-13')
 --SET Version_description = @Version_description,EndOfSupport = @EndOfSupport, Active = '1'
 --WHERE Version_id = @Version_id;
 
+Delete Version
 --Queries DivicesTypes
 
 SELECT*
@@ -91,9 +104,8 @@ UPDATE DeviceType
 SET D_type_description = 'Editado', Active = '1'
 WHERE D_type_id = 0;
 
---Queries DivicesTypes
-
-
+DELETE DeviceType
+--Queries Inventory
 
 SELECT I.Inventory_id,I.D_type_id, I.Location_id, I.Version_id, I.Model_id, DT.D_type_description AS DeviceType, I.SerialNo, I.PurchaseDate, L.Location_description AS Location, V.Version_description AS Version, M.Model_description AS Model, I.Active
 FROM Inventory AS I inner join DeviceType AS DT 
@@ -104,6 +116,7 @@ ON L.Location_id = I.Location_id
 WHERE I.Inventory_id = 1010
 
 
+
 INSERT INTO Inventory (D_type_id, SerialNo, PurchaseDate, Location_id, Version_id, Model_id, Active)
 VALUES (1,'2432', '2024-02-13', 1, 1, 1, '1')
 SELECT SCOPE_IDENTITY();
@@ -112,6 +125,29 @@ SELECT SCOPE_IDENTITY();
 SELECT*
 FROM Inventory
 
+Delete Inventory
+
 --UPDATE Inventory
 --SET D_type_id = @D_type_id, SerialNo = @SerialNo, PurchaseDate = @PurchaseDate, Location_id = @Location_id, Version_id = @Version_id, Model_id = @Model_id, Active = '1'
 --WHERE Inventory_id = @Inventory_id;
+
+
+
+SELECT I.Inventory_id,I.D_type_id, I.Location_id, I.Version_id, I.Model_id, DT.D_type_description AS DeviceType, I.SerialNo, I.PurchaseDate, L.Location_description AS Location, V.Version_description AS Version, M.Model_description AS Model, I.Active
+FROM Inventory AS I inner join DeviceType AS DT 
+ON I.D_type_id = DT.D_type_id inner join Version AS V
+ON V.Version_id = I.Version_id inner join Model AS M
+ON M.Model_id = I.Model_id inner join Location AS L
+ON L.Location_id = I.Location_id
+WHERE I.Active=1 and L.Plant_id = 1009;
+
+
+SELECT I.Inventory_id, I.Plant, L.Location_id
+FROM Inventory AS I inner join Location AS L 
+ON I.Location_id = L.Location_id
+WHERE L.Location_id = 1025
+
+
+
+
+

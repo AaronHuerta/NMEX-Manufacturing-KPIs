@@ -10,5 +10,7 @@ namespace NMEX_Manufacturing_KPIs.Models.Module_Inventory
         public IEnumerable<SelectListItem> Versions { get; set; }
         public IEnumerable<SelectListItem> Models { get; set; }
 
+        //Filter by plant
+        public IEnumerable<SelectListItem> Plants { get; set; }
     }
 }

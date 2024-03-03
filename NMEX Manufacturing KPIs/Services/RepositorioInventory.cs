@@ -7,6 +7,7 @@ namespace NMEX_Manufacturing_KPIs.Services
 
     public interface IRepositorioInventory
     {
+        //Task<IEnumerable<Inventory>> ByLocationGetInventoryRecords(int Location_id);
         Task CreateDeviceType(DeviceType deviceType);
         Task CreateInventoryRecord(InventoryCreationViewModel inventoryRecord);
         Task CreateLocation(Location location);
@@ -19,16 +20,20 @@ namespace NMEX_Manufacturing_KPIs.Services
         Task DeleteVersion(int Version_id);
         Task EditDeviceType(DeviceType deviceType);
         Task EditInventoryRecord(InventoryCreationViewModel inventoryRecord);
+        //Task EditInventoryRecordLocation(int Inventory_id, string Plant);
         Task EditLocation(Location location);
         Task EditModel(Model model);
         Task EditVersion(Models.Module_Inventory.Version version);
+        Task<int> GetByDescriptionPlant(string Plant_description);
         Task<DeviceType> GetByIdDeviceType(int D_type_id);
         Task<Inventory> GetByIdInventoryRecord(int Inventory_id);
         Task<Location> GetByIdLocation(int Location_id);
         Task<Model> GetByIdModel(int Model_id);
+        Task<Plant> GetByIdPlant(int Plant_id);
         Task<Models.Module_Inventory.Version> GetByIdVersion(int Version_id);
         Task<IEnumerable<DeviceType>> GetDevicesTypes();
         Task<IEnumerable<Inventory>> GetInventoryRecords();
+        Task<IEnumerable<Inventory>> GetInventoryRecordsFilter(int Plant_id);
         Task<IEnumerable<Location>> GetLocations();
         Task<IEnumerable<Model>> GetModels();
         Task<IEnumerable<Plant>> GetPlants();
@@ -60,17 +65,32 @@ namespace NMEX_Manufacturing_KPIs.Services
             inventoryRecord.Inventory_Id = id;
         }
 
-        //Método para obtener el listado locations
+        //Método para obtener el listado de inventory
         public async Task<IEnumerable<Inventory>> GetInventoryRecords()
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryAsync<Inventory>(@"SELECT I.Inventory_id,I.D_type_id, I.Location_id, I.Version_id, I.Model_id, DT.D_type_description AS DeviceType, I.SerialNo, I.PurchaseDate, L.Location_description AS Location, V.Version_description AS Version, M.Model_description AS Model, I.Active
+            return await connection.QueryAsync<Inventory>(@"SELECT I.Inventory_id,I.D_type_id, I.Location_id,P.Plant_description AS PlantRecord, I.Version_id, I.Model_id, DT.D_type_description AS DeviceType, I.SerialNo, I.PurchaseDate, L.Location_description AS Location, V.Version_description AS Version, M.Model_description AS Model, I.Active
                                                             FROM Inventory AS I inner join DeviceType AS DT 
                                                             ON I.D_type_id = DT.D_type_id inner join Version AS V
                                                             ON V.Version_id = I.Version_id inner join Model AS M
                                                             ON M.Model_id = I.Model_id inner join Location AS L
-                                                            ON L.Location_id = I.Location_id
+                                                            ON L.Location_id = I.Location_id inner join Plant AS P
+                                                            ON L.Plant_id = P.Plant_id
                                                             WHERE I.Active=1");
+        }
+
+        //Método para obtener el listado de inventory filtrado
+        public async Task<IEnumerable<Inventory>> GetInventoryRecordsFilter(int Plant_id)
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryAsync<Inventory>(@"SELECT I.Inventory_id,I.D_type_id, I.Location_id,P.Plant_description AS PlantRecord,I.Version_id, I.Model_id, DT.D_type_description AS DeviceType, I.SerialNo, I.PurchaseDate, L.Location_description AS Location, V.Version_description AS Version, M.Model_description AS Model, I.Active
+                                                            FROM Inventory AS I inner join DeviceType AS DT 
+                                                            ON I.D_type_id = DT.D_type_id inner join Version AS V
+                                                            ON V.Version_id = I.Version_id inner join Model AS M
+                                                            ON M.Model_id = I.Model_id inner join Location AS L
+                                                            ON L.Location_id = I.Location_id inner join Plant AS P
+                                                            ON L.Plant_id = P.Plant_id
+                                                            WHERE I.Active=1 and P.Plant_id = @Plant_id", new { Plant_id });
         }
 
 
@@ -78,16 +98,36 @@ namespace NMEX_Manufacturing_KPIs.Services
         public async Task<Inventory> GetByIdInventoryRecord(int Inventory_id)
         {
             using var connection = new SqlConnection(connectionString);
-            return await connection.QueryFirstOrDefaultAsync<Inventory>(@"SELECT I.Inventory_id,I.D_type_id, I.Location_id, I.Version_id, I.Model_id, DT.D_type_description AS DeviceType, I.SerialNo, I.PurchaseDate, L.Location_description AS Location, V.Version_description AS Version, M.Model_description AS Model, I.Active
+            return await connection.QueryFirstOrDefaultAsync<Inventory>(@"SELECT I.Inventory_id,I.D_type_id, I.Location_id,P.Plant_description AS PlantRecord, I.Version_id, I.Model_id, DT.D_type_description AS DeviceType, I.SerialNo, I.PurchaseDate, L.Location_description AS Location, V.Version_description AS Version, M.Model_description AS Model, I.Active
                                                                         FROM Inventory AS I inner join DeviceType AS DT 
                                                                         ON I.D_type_id = DT.D_type_id inner join Version AS V
                                                                         ON V.Version_id = I.Version_id inner join Model AS M
                                                                         ON M.Model_id = I.Model_id inner join Location AS L
-                                                                        ON L.Location_id = I.Location_id
+                                                                        ON L.Location_id = I.Location_id inner join Plant AS P
+                                                                        ON L.Plant_id = P.Plant_id
                                                                         WHERE I.Active=1 and I.Inventory_id = @Inventory_id", new { Inventory_id });
 
 
         }
+
+        ////Obtener inventrario por locacion
+        //public async Task<IEnumerable<Inventory>> ByLocationGetInventoryRecords(int Location_id)
+        //{
+        //    using var connection = new SqlConnection(connectionString);
+        //    return await connection.QueryAsync<Inventory>(@"SELECT I.Inventory_id, I.Plant, L.Location_id
+        //                                                    FROM Inventory AS I inner join Location AS L 
+        //                                                    ON I.Location_id = L.Location_id
+        //                                                    WHERE L.Location_id = @Location_id", new {Location_id});
+        //}
+
+        ////Método para editar la planta del registro 
+        //public async Task EditInventoryRecordLocation(int Inventory_id, string Plant)
+        //{
+        //    using var connection = new SqlConnection(connectionString);
+        //    await connection.ExecuteAsync(@"UPDATE Inventory
+        //                                    SET Plant = @Plant
+        //                                    WHERE Inventory_id = @Inventory_id;", new {Inventory_id, Plant});
+        //}
 
         //Método para editar registro
         public async Task EditInventoryRecord(InventoryCreationViewModel inventoryRecord)
@@ -339,6 +379,24 @@ namespace NMEX_Manufacturing_KPIs.Services
             return await connection.QueryAsync<Plant>(@"SELECT Plant_id, Plant_description, Active
                                                         FROM Plant
                                                         WHERE Active='1'");
+        }
+
+        //Método para seleccionar ID
+        public async Task<Plant> GetByIdPlant(int Plant_id)
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryFirstOrDefaultAsync<Plant>(@"SELECT Plant_id, Plant_description, Active
+                                                                        FROM Plant
+                                                                        WHERE Plant_id = @Plant_id", new { Plant_id });
+        }
+
+        //Método para seleccionar ID
+        public async Task<int> GetByDescriptionPlant(string Plant_description)
+        {
+            using var connection = new SqlConnection(connectionString);
+            return await connection.QueryFirstOrDefaultAsync<int>(@"SELECT Plant_id
+                                                                    FROM Plant
+                                                                    WHERE Plant_description = @Plant_description", new { Plant_description });
         }
 
 

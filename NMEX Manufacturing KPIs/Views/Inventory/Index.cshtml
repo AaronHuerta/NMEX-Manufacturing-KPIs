@@ -14,6 +14,11 @@
 
 <h1 style="margin-top: 25px;">Inventory (Planta Actual)</h1>
 <a asp-action="CreateInventoryRecord" class="btn btn-primary mb-3" style="margin-top: 5px;">New record</a>
+@* ADMIN USER *@
+<a asp-action="FilterByPlant" class="btn btn-primary mb-3" style="margin-top: 5px;">Filter by plant</a>
+
+<a asp-action="InventoryRecordExcel" class="btn btn-success mb-3" style="margin-top: 5px;">Excel</a>
+
 <table class="table">
     <thead>
         <tr>
@@ -23,6 +28,7 @@
             <th>Model</th>
             <th>Version</th>
             <th>Location</th>
+            <th>Plant</th>
             <th>Purchase Date</th>
             <th>Accions</th>
         </tr>
@@ -49,6 +55,9 @@
                     </td>
                     <td>
                         @recordInventory.Location
+                    </td>
+                    <td>
+                        @recordInventory.PlantRecord
                     </td>
                     <td>
                         @recordInventory.PurchaseDate

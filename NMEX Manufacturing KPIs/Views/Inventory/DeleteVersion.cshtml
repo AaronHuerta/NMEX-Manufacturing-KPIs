@@ -4,7 +4,7 @@
  
 <h3 class="mb-3">Are you sure you want to delete the item?</h3>
 
-<form aps-controller="Inventory" asp-action="DeleteRecordVersion">
+<form asp-controller="Inventory" asp-action="DeleteRecordVersion">
     <input type="hidden" asp-for="Version_id">
     <button class="btn btn-danger" type="submit">Delete</button>
     <a class="btn btn-secondary" asp-action="Version">Cancel</a>
