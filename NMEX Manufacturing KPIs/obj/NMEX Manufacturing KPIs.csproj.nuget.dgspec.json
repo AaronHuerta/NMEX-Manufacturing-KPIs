@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Aaron\\source\\repos\\NMEX Manufacturing KPIs\\NMEX Manufacturing KPIs\\NMEX Manufacturing KPIs.csproj": {}
+    "C:\\Users\\Aaron\\OneDrive\\Escritorio\\Documentos OneDrive\\Proyecto Emilio\\Security and Inventory\\NMEX-Manufacturing-KPIs\\NMEX Manufacturing KPIs\\NMEX Manufacturing KPIs.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Aaron\\source\\repos\\NMEX Manufacturing KPIs\\NMEX Manufacturing KPIs\\NMEX Manufacturing KPIs.csproj": {
+    "C:\\Users\\Aaron\\OneDrive\\Escritorio\\Documentos OneDrive\\Proyecto Emilio\\Security and Inventory\\NMEX-Manufacturing-KPIs\\NMEX Manufacturing KPIs\\NMEX Manufacturing KPIs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Aaron\\source\\repos\\NMEX Manufacturing KPIs\\NMEX Manufacturing KPIs\\NMEX Manufacturing KPIs.csproj",
+        "projectUniqueName": "C:\\Users\\Aaron\\OneDrive\\Escritorio\\Documentos OneDrive\\Proyecto Emilio\\Security and Inventory\\NMEX-Manufacturing-KPIs\\NMEX Manufacturing KPIs\\NMEX Manufacturing KPIs.csproj",
         "projectName": "NMEX Manufacturing KPIs",
-        "projectPath": "C:\\Users\\Aaron\\source\\repos\\NMEX Manufacturing KPIs\\NMEX Manufacturing KPIs\\NMEX Manufacturing KPIs.csproj",
+        "projectPath": "C:\\Users\\Aaron\\OneDrive\\Escritorio\\Documentos OneDrive\\Proyecto Emilio\\Security and Inventory\\NMEX-Manufacturing-KPIs\\NMEX Manufacturing KPIs\\NMEX Manufacturing KPIs.csproj",
         "packagesPath": "C:\\Users\\Aaron\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Aaron\\source\\repos\\NMEX Manufacturing KPIs\\NMEX Manufacturing KPIs\\obj\\",
+        "outputPath": "C:\\Users\\Aaron\\OneDrive\\Escritorio\\Documentos OneDrive\\Proyecto Emilio\\Security and Inventory\\NMEX-Manufacturing-KPIs\\NMEX Manufacturing KPIs\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Aaron\\AppData\\Roaming\\NuGet\\NuGet.Config",

@@ -1,0 +1,21 @@
+﻿@model NMEX_Manufacturing_KPIs.Models.Module_Security.SubCategoryCreationViewModel
+@{
+    ViewData["Title"] = "New SubCategory";
+}
+
+<!-- Mostrar el Category_id -->
+<p>Selected Category ID: @Model.Category_id</p>
+
+<form aps-controller="SubCategory" asp-action="CreateSubCategory">
+    <div class="mb-3">
+        <label asp-for="SubCategory_description" class="form-label">Descripcion de la Categoria</label>
+        <input type="text" asp-for="SubCategory_description" class="form-control" />
+        <span asp-validation-for="SubCategory_description" class="text-danger"></span>
+    </div>
+    <!-- Campo oculto para el Category_id -->
+    <input type="hidden" asp-for="Category_id" />
+
+    <button type="submit" class="btn btn-primary">Send</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+
+</form>

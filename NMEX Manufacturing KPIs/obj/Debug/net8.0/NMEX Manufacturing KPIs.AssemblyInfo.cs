@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("NMEX Manufacturing KPIs")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+5fad2808ecfc6dacfad5feac4dc90e11ede8afe0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4090165a3b477fecda95597c08fc234910bac0a5")]
 [assembly: System.Reflection.AssemblyProductAttribute("NMEX Manufacturing KPIs")]
 [assembly: System.Reflection.AssemblyTitleAttribute("NMEX Manufacturing KPIs")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -1,0 +1,189 @@
+﻿@model IEnumerable<NMEX_Manufacturing_KPIs.Models.Module_Security.SubCategory>
+
+@{
+    ViewData["Title"] = "Subcategory";
+    var totalRecords = Model.Count();
+}
+<link rel="stylesheet" href="~/css/SubCategories.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+
+<style>
+
+    .color1 {
+        background-color: #f3f3aa;
+    }
+
+    .color2 {
+        background-color: #99c8f2;
+    }
+
+    .color3 {
+        background-color: #8b7ed5;
+    }
+
+    .color4 {
+        background-color: #ffba56;
+    }
+
+    .color5 {
+        background-color: #ca715c;
+    }
+
+    .color6 {
+        background-color: #7bce00;
+    }
+
+    .elemento {
+        text-decoration: none;
+        color: black;
+    }
+
+    .table {
+        border-collapse: collapse;
+        width: 110%;
+    }
+
+        .table th, .table td {
+            border: 1px solid black; /* Color del borde */
+            padding: 8px;
+            text-align: left;
+        }
+
+        .table th {
+            background-color: #f2f2f2; /* Color de fondo del encabezado */
+        }
+   .centrar {
+  text-align: center;
+  margin: 10px;
+}
+
+</style>
+
+
+
+    <table class="table">
+        <thead>
+            <a asp-action="CreateSubCategory" asp-controller="Security" asp-route-id="@Model.First().Category_id" class="btn btn-dark" style="margin-top: 5px;">New SubCategory</a>
+            <br />
+            <br />
+            <tr>
+                <th>Category Description</th>
+                <th>SubCategory</th>
+                <th>Upload File</th>
+                <th>Calification</th>
+                <th colspan="3">Comment</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                string currentFunction = null;
+                int rowIndex = 0;
+
+                foreach (var SubCategory in Model)
+                {
+                    if (currentFunction == null || currentFunction != SubCategory.Category_description)
+                    {
+                        // Nuevo valor en la columna Function
+                        currentFunction = SubCategory.Category_description;
+                        rowIndex++;
+                        var rowColorClass = GetColorClass(rowIndex);
+                        <form asp-action="UpdateCalification" method="post">
+                            <tr class="@rowColorClass">
+                                <td rowspan="@Model.Count(s => s.Category_description == currentFunction)">
+                                    @currentFunction
+                                </td>
+                                <td>@SubCategory.SubCategory_description</td>
+                                <td>
+                                    <input type="file" id="real-file" hidden="hidden" />
+                                    <input class="custom-file-input" type="file">
+                                </td>
+                        
+                                <td>
+
+                                    <div class="mb-3">
+                                        <input type="hidden" asp-for="@SubCategory.SubCategory_id" />
+                                        <select asp-for="@SubCategory.Result" class="form-select">
+                                            <option value="true">True</option>
+                                            <option value="false">False</option>
+                                        </select>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Send</button>
+                            
+                                </td>
+                                <td>
+                                <input type="text" asp-for="@SubCategory.Comment" class="form-control" />
+                                </td>
+                        
+                                <td>
+                                    <a class="btn btn-dark" asp-action="EditLocation" asp-route-id="@SubCategory.SubCategory_id" style="margin-right: 5px;"><ion-icon name="pencil-outline"></ion-icon></a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-dark" asp-action="DeleteSubCategory" asp-route-id="@SubCategory.SubCategory_id"><ion-icon name="trash-outline"></ion-icon></a>
+                                </td>
+                            </tr>
+                        </form>
+                    }
+                    else
+                    {
+                        // Mismo valor en la columna Function
+                        var rowColorClass = GetColorClass(rowIndex);
+                        <form asp-action="UpdateCalification" method="post">
+                            <tr class="@rowColorClass">
+                                <td>
+                                    @SubCategory.SubCategory_description
+                                </td>
+                                <td>
+                                    <input type="file" id="real-file" hidden="hidden" />
+                                    <input class="custom-file-input" type="file">
+                                </td>
+                                <td>
+                                    <div class="mb-3">
+                                <input type="hidden" asp-for="@SubCategory.SubCategory_id" enctype="multipart/form-data" />
+                                        <select asp-for="@SubCategory.Result" class="form-select">
+                                            <option value="true">True</option>
+                                            <option value="false">False</option>
+                                        </select>
+                                        <br />
+                                        
+                                        <button type="submit" class="btn btn-primary">Send</button>                              
+                                    </div>
+                                </td>
+                                <td>
+                                <input type="text" asp-for="@SubCategory.Comment" class="form-control" />
+                                </td>                        
+                                <td>
+                                    <a class="btn btn-dark" asp-action="EditLocation" asp-route-id="@SubCategory.SubCategory_id" style="margin-right: 5px;"><ion-icon name="pencil-outline"></ion-icon></a>
+                                </td>
+                                <td>
+                                    <a class="btn btn-dark" asp-action="DeleteSubCategory" asp-route-id="@SubCategory.SubCategory_id"><ion-icon name="trash-outline"></ion-icon></a>
+                                </td>
+                            </tr>
+                       </form>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+
+
+
+
+
+
+<script src="~/js/SubCategory.js" asp-append-version="true"></script>
+@functions {
+    // Función para obtener la clase de color según el índice
+    string GetColorClass(int index)
+    {
+        switch (index % 6)
+        {
+            case 1: return "color1";
+            case 2: return "color2";
+            case 3: return "color3";
+            case 4: return "color4";
+            case 5: return "color5";
+            case 0: return "color6";
+            default: return ""; // En caso de algún error
+        }
+    }
+}
