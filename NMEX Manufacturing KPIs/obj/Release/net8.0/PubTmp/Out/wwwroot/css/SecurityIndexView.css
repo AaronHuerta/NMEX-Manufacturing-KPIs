@@ -1,0 +1,54 @@
+.color1 {
+    background-color: #f3f3aa;
+}
+.color2 {
+    background-color: #99c8f2;
+}
+.color3 {
+    background-color: #8b7ed5;
+}
+.color4 {
+    background-color: #ffba56;
+}
+.color5 {
+    background-color: #ca715c;
+}
+.color6 {
+    background-color: #7bce00;
+}
+.elemento {
+    text-decoration: none;
+    color: black;
+}
+.table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-left: 50px;
+}
+.table th, .table td {
+border: 1px solid black; /* Color del borde */
+padding: 8px;
+text-align: left;
+}
+
+.table th {
+background-color: #f2f2f2; /* Color de fondo del encabezado */
+}
+
+.CenterTextRowSpan {
+    text-align: center; /* Centrar horizontalmente */
+    vertical-align: middle; /* Centrar verticalmente */
+}
+
+.Title {
+    display: flex;
+    justify-content: center;
+    margin-left: 50px;
+}
+
+.btn_trash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+}

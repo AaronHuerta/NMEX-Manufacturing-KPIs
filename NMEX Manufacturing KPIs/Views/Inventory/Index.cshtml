@@ -4,31 +4,47 @@
     ViewData["Title"] = "Inventory";
     int i = 1;
 }
+<style>
+	.btn_trash {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        color: black;
+    }
+</style>
 
-<div style="display: flex;">
-    <a class="btn btn-primary" asp-action="DeviceType"  style="margin-right: 5px;">Manage Devices</a>
-    <a class="btn btn-primary" asp-action="Version"  style="margin-right: 5px;">Manage Versions</a>
-    <a class="btn btn-primary" asp-action="Model"  style="margin-right: 5px;">Manage Models</a>
-    <a class="btn btn-primary" asp-action="Location" style="margin-right: 5px;">Manage Locations</a>
-</div>
 
-<h1 style="margin-top: 25px;">Inventory (Planta Actual)</h1>
-<a asp-action="CreateInventoryRecord" class="btn btn-primary mb-3" style="margin-top: 5px;">New record</a>
+<h1 style="margin-top: 25px;">NMEX Manufacturing KPIs \ Inventory</h1>
+<br/>
+<div style="display: flex; flex-wrap: wrap; justify-content: space-between;">
+    <a class="btn btn-dark" asp-action="DeviceType">Manage Devices</a>
+    <a class="btn btn-dark" asp-action="Version">Manage Versions</a>
+    <a class="btn btn-dark" asp-action="Model">Manage Models</a>
+    <a class="btn btn-dark" asp-action="Location">Manage Locations</a>
+    
 @* ADMIN USER *@
-<a asp-action="FilterByPlant" class="btn btn-primary mb-3" style="margin-top: 5px;">Filter by plant</a>
 
-<a asp-action="InventoryRecordExcel" class="btn btn-success mb-3" style="margin-top: 5px;">Excel</a>
+</div>
+<br/>
+
+<a asp-action="CreateInventoryRecord" class="btn btn-dark">New record</a>
+
+<a asp-action="FilterByPlant" class="btn btn-dark mt-5px">Filter by plant</a>
+
+<a asp-action="InventoryRecordExcel" class="btn btn-success">Excel</a>
+
+
 
 <table class="table">
     <thead>
         <tr>
             <th>#</th>
+			<th>Device Type</th>
+			<th>Model</th>
             <th>Serial No.</th>
-            <th>Device Type</th>
-            <th>Model</th>
-            <th>Version</th>
-            <th>Location</th>
+			<th>Version</th>
             <th>Plant</th>
+            <th>Location</th>
             <th>Purchase Date</th>
             <th>Accions</th>
         </tr>
@@ -41,31 +57,31 @@
                     <td>
                         @i
                     </td>
-                    <td>
-                        @recordInventory.SerialNo
-                    </td>
-                    <td>
+					<td>
                        @recordInventory.DeviceType
                     </td>
-                    <td>
+					<td>
                         @recordInventory.Model
                     </td>
                     <td>
+                        @recordInventory.SerialNo
+                    </td>                   
+                    <td>
                         @recordInventory.Version
+                    </td>
+					<td>
+                        @recordInventory.PlantRecord
                     </td>
                     <td>
                         @recordInventory.Location
-                    </td>
-                    <td>
-                        @recordInventory.PlantRecord
                     </td>
                     <td>
                         @recordInventory.PurchaseDate
                     </td>
                     <td>
                         <div style="display: flex;">
-                            <a class="btn btn-danger" asp-action="DeleteInventory" asp-route-id="@recordInventory.Inventory_Id" style="margin-right: 5px;">Delete</a>
-                            <a class="btn btn-primary" asp-action="EditInventoryRecord" asp-route-id="@recordInventory.Inventory_Id">Edit</a>
+                            <a class="btn_trash" asp-action="DeleteInventory" asp-route-id="@recordInventory.Inventory_Id" style="margin-right: 5px;"><ion-icon name="trash-outline"></ion-icon></a>
+                            <a class="btn_trash" asp-action="EditInventoryRecord" asp-route-id="@recordInventory.Inventory_Id"><ion-icon name="pencil-outline"></ion-icon></a>
                         </div>
                     </td>
                 </tr>
@@ -73,3 +89,5 @@
         }
     </tbody>
 </table>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

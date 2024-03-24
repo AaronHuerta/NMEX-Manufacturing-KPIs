@@ -1,0 +1,50 @@
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\NMEX Manufacturing KPIs.exe
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\appsettings.Development.json
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\appsettings.json
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\NMEX Manufacturing KPIs.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\NMEX Manufacturing KPIs.deps.json
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\NMEX Manufacturing KPIs.runtimeconfig.json
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\NMEX Manufacturing KPIs.pdb
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\AutoMapper.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\Azure.Core.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\Azure.Identity.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\ClosedXML.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\Dapper.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\DocumentFormat.OpenXml.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\ExcelNumberFormat.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\Irony.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\Microsoft.Bcl.AsyncInterfaces.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\Microsoft.Data.SqlClient.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\Microsoft.Identity.Client.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\Microsoft.Identity.Client.Extensions.Msal.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\Microsoft.IdentityModel.Abstractions.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\Microsoft.IdentityModel.JsonWebTokens.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\Microsoft.IdentityModel.Logging.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\Microsoft.IdentityModel.Protocols.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\Microsoft.IdentityModel.Protocols.OpenIdConnect.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\Microsoft.IdentityModel.Tokens.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\Microsoft.SqlServer.Server.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\Microsoft.Win32.SystemEvents.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\SixLabors.Fonts.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\System.Configuration.ConfigurationManager.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\System.Drawing.Common.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\System.IdentityModel.Tokens.Jwt.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\System.IO.Packaging.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\System.Memory.Data.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\System.Runtime.Caching.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\System.Security.Permissions.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\System.Windows.Extensions.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\XLParser.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\runtimes\unix\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net6.0\Microsoft.Data.SqlClient.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\runtimes\win-arm\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\runtimes\win-arm64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\runtimes\win-x64\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\runtimes\win-x86\native\Microsoft.Data.SqlClient.SNI.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net6.0\Microsoft.Win32.SystemEvents.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\runtimes\unix\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Drawing.Common.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Security.Cryptography.ProtectedData.dll
+C:\Users\Alonso.juan\Desktop\MainKPI_KPI\NMEX Manufacturing KPIs\obj\Release\net8.0\PubTmp\Out\runtimes\win\lib\net6.0\System.Windows.Extensions.dll

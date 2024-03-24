@@ -24,8 +24,9 @@ namespace NMEX_Manufacturing_KPIs.Services
         Task CreateSubCategory(SubCategory category);
         Task DeleteSubCategory(int SubCategory_id);
         Task<SubCategory> GetDeleteByIdSubCategory(int SubCategory_id);
-
+       
         Task UpdateCalification(int subCategoryId, string newCalification, string comment);
+
 
     }
     public class RepositorioSecurity: IRepositorioSecurity
@@ -45,7 +46,7 @@ namespace NMEX_Manufacturing_KPIs.Services
             using var connection = new SqlConnection(connectionString);
 
             return await connection.QueryAsync<Categories>(@"EXEC[dbo].[ShowFunctionResult]
-        @Plan_idFilter = 1009");
+        @Plan_idFilter = 1");
 
         }
         
@@ -65,7 +66,7 @@ namespace NMEX_Manufacturing_KPIs.Services
             using var connection = new SqlConnection(connectionString);
             var id = await connection.QuerySingleAsync<int>(@"  INSERT INTO [Nissan].[dbo].[SubCategory] (SubCategory_description, Category_id, Active) 
                                                             VALUES (@SubCategory_description, @Category_id,1);
-                                                            EXEC [dbo].[InsertTableSecurityByPlant] @Plan_idFilter = 1009, @Category_idFilter = @Category_id
+                                                            EXEC [dbo].[InsertTableSecurityByPlant] @Plan_idFilter = 1, @Category_idFilter = @Category_id
                                                             SELECT SCOPE_IDENTITY();", category);
 
             category.Category_id = id;
@@ -83,7 +84,7 @@ namespace NMEX_Manufacturing_KPIs.Services
             using var connection = new SqlConnection(connectionString);
 
             return await connection.QueryAsync<SubCategory>(@"EXEC [dbo].[InsertTableSecurityByPlant]  
-	@Plan_idFilter = 1009 ,@Category_idFilter = @Category_id", new { Category_id });
+	@Plan_idFilter = 1 ,@Category_idFilter = @Category_id", new { Category_id });
         }
 
         public async Task<Categories> GetDeleteByIdCategory(int Category_id)
@@ -95,7 +96,7 @@ namespace NMEX_Manufacturing_KPIs.Services
             return await connection.QueryFirstOrDefaultAsync<Categories>(@"SELECT Category_id, Category_description, Category_identifier, C.Function_id, C.Active, F.Function_description AS Function_name
                     FROM [Nissan].[dbo].[Categories] AS C
                     INNER JOIN [Nissan].[dbo].[Function] AS F ON C.Function_id = F.Function_id
-                    WHERE C.Active = 1 AND Category_id = @Category_id", new { Category_id });
+                    WHERE C.Active = 1 AND F.ACTIVE = 1 AND Category_id = @Category_id", new { Category_id });
 
         }
 
@@ -122,11 +123,11 @@ namespace NMEX_Manufacturing_KPIs.Services
 FROM 
     [Nissan].[dbo].[SubCategory] AS SC
     INNER JOIN 
-    [Nissan].[dbo].[Security] S ON SC.[SubCategory_id] = S.[SubCategory_id] AND S.[Plant_id] = 1009
+    [Nissan].[dbo].[Security] S ON SC.[SubCategory_id] = S.[SubCategory_id] AND S.[Plant_id] = 1
     INNER JOIN
     [Nissan].[dbo].[Categories] C ON SC.[Category_id] = C.[Category_id]
 WHERE 
-    C.Active = 1
+    C.Active = 1 AND S.Active = 1 AND SC.Active = 1
     AND S.[SubCategory_id] = @SubCategory_id", new { SubCategory_id });
 
         }
@@ -147,7 +148,7 @@ WHERE
         {
             using var connection = new SqlConnection(connectionString);
             await connection.ExecuteAsync(
-                "  UPDATE Security SET [Result] = @newCalification, Comment = @Comment where Plant_id = 1009 and SubCategory_id = @subCategoryId",
+                "  UPDATE Security SET [Result] = @newCalification, Comment = @Comment where Plant_id = 1 and SubCategory_id = @subCategoryId",
                 new { NewCalification = newCalification, SubCategoryId = subCategoryId, Comment = comment }
             );
         }

@@ -291,15 +291,13 @@ namespace NMEX_Manufacturing_KPIs.Controllers
                             inventoryRecords.Version_id = (int)inventoryRecord["Version"];
                             inventoryRecords.Location_id = (int)inventoryRecord["Location"];
                             inventoryRecords.PurchaseDate = inventoryRecord["Purchase Date"].ToString();
-                            await repositorioInventory.CreateInventoryRecord(inventoryRecords);
-                            
+                            await repositorioInventory.CreateInventoryRecord(inventoryRecords);                         
                         }
                         
                     }
                 }
                 // Redirigir a una acción de éxito o a donde sea necesario
                 return RedirectToAction(nameof(Index));
-
             }
             catch (Exception ex)
             {
@@ -808,5 +806,6 @@ namespace NMEX_Manufacturing_KPIs.Controllers
             var tiposAreas = await repositorioInventory.GetPlants();
             return tiposAreas.Select(x => new SelectListItem(x.Plant_description, x.Plant_id.ToString()));
         }
+
     }
 }

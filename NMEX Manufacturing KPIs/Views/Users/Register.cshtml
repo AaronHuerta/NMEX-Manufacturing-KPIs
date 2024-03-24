@@ -1,0 +1,68 @@
+﻿@model NMEX_Manufacturing_KPIs.Models.Module_User.RegisterViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Establece el diseño diferent
+    ViewData["Title"] = "Crear Usuario";
+}
+
+<h1>Regístrate</h1>
+
+<div class="card">
+    <div class="card-body">
+        <form asp-action="Register">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="FirstName" class="form-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="LastNamePaternal" class="form-label"></label>
+                <input asp-for="LastNamePaternal" class="form-control" />
+                <span asp-validation-for="LastNamePaternal" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="LastNameMaternal" class="form-label"></label>
+                <input asp-for="LastNameMaternal" class="form-control" />
+                <span asp-validation-for="LastNameMaternal" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Email" class="form-label"></label>
+                <input asp-for="Email" class="form-control" />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Password" class="form-label"></label>
+                @* <input asp-for="Password" type="password" class="form-control" /> *@
+                <input asp-for="Password" class="form-control" />
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="Privilege">Privileges</label>
+                <select asp-for="Privilege" class="form-select" aria-label="Default select example">
+                    <option value=true>Admin</option>
+                    <option value=false>Viewer</option>
+                </select>
+                <span asp-validation-for="Privilege" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="Plant_id" class="form-label">Plant</label>
+                <select asp-for="Plant_id" asp-items="Model.Plants" class="form-select"></select>
+                <span asp-validation-for="Plant_id" class="text-danger"></span>
+            </div>
+
+            <button class="btn-primary btn">Create User</button>
+            <a class="btn btn-success" asp-action="Index">Cancel</a>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -18,11 +18,20 @@ namespace NMEX_Manufacturing_KPIs.Models.Module_Security
 
         public string Category_description { get; set; }
 
+        public string Category_name { get; set; }
+
         public string Result { get; set; }
 
         public string Comment { get; set; }
 
         public string UpdatedResult { get; set; }
+
+        public string Function_name { get; set; }
+
+        public string Plant_description { get; set; }
+
+        public List<SubCategory> SubCategories { get; set; }
+        public string[] Files { get; set; }
 
     }
 }

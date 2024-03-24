@@ -3,156 +3,109 @@
     ViewData["Title"] = "Security";
 }
 
+@*<link rel="stylesheet" href="~/css/Layout.css" asp-append-version="true" />*@
 <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-
-<style>
-    .color1 {
-        background-color: #f3f3aa; 
-    }
-
-    .color2 {
-        background-color: #99c8f2;
-    }
-
-    .color3 {
-        background-color: #8b7ed5;
-    }
-
-    .color4 {
-        background-color: #ffba56; 
-    }
-
-    .color5 {
-        background-color: #ca715c; 
-    }
-
-    .color6 {
-        background-color: #7bce00;
-    }
-
-    .elemento {
-        text-decoration: none;
-        color: black; 
-    }
-
-    .table {
-        border-collapse: collapse;
-        width: 100%;
-    }
-
-        .table th, .table td {
-            border: 1px solid black; /* Color del borde */
-            padding: 8px;
-            text-align: left;
-        }
-
-        .table th {
-            background-color: #f2f2f2; /* Color de fondo del encabezado */
-        }
-
-    .CenterTextRowSpan{
-        vertical-align: middle; /* Centrado vertical */
-        width:100px;
-    }
+<link rel="stylesheet" href="~/css/SecurityIndexView.css" asp-append-version="true" />
 
 
+		<table class="table">
+		
+		
+			<thead>
+				<br />
+				<br />
+				<div class= "Title">
+				<h1> NMEX Manufacturing KPIs \ CyberSecurity <h1/>
+				<a asp-action="CreateCategory" class="btn btn-dark" style="margin-right: 30px;">New Category</a>
+				<div/>
+				<tr>
+					<th>Function</th>
+					<th>Category</th>
+					<th>Category Identifier</th>
+					<th>Calification</th>
+					<th colspan="2">Average</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				@{
+					string currentFunction = null;
+					int rowIndex = 0;
 
-</style>
+					foreach (var security in Model)
+					{
+						if (currentFunction == null || currentFunction != security.Function_name)
+						{
+							// Nuevo valor en la columna Function
+							currentFunction = security.Function_name;
+							rowIndex++;
+							var rowColorClass = GetColorClass(rowIndex);
 
-<table class="table">
-    <thead>
-        <a asp-action="CreateCategory" class="btn btn-dark" style="margin-top: 5px;">New Category</a>
-        <br />
-        <br />
-       
-        <tr>
-            <th>Function</th>
-            <th>Category</th>
-            <th>Category Identifier</th>
-            <th>Calification</th>
-            <th colspan="3">Average</th>
-            
-        </tr>
-    </thead>
-    <tbody>
-        @{
-            string currentFunction = null;
-            int rowIndex = 0;
+							<tr class="@rowColorClass">
+								<td rowspan="@Model.Count(s => s.Function_name == currentFunction)" class="CenterTextRowSpan">
+									@currentFunction
+								</td>
+								<td>
+									@if (Model != null && Model.Any())
+									{
+										<a class="elemento" asp-action="Subcategory" asp-route-id="@security.Category_id" style="margin-right: 5px;">@security.Category_name</a>
+									}
+									else
+									{
+										<a class="elemento" asp-action="CreateSubCategory" asp-route-id="@security.Category_id" style="margin-right: 5px;">@security.Category_name</a>
+									}
+								</td>
+								<td>
+									@security.Category_identifier
+								</td>
+								<td>
+									@security.Result
+								</td>
+								<td rowspan="@Model.Count(s => s.Function_name == currentFunction)" class="CenterTextRowSpan">
+									@security.ResultFunction
+								</td>
+								@*
+								<td>
+									<a class="btn" asp-action="EditLocation" asp-route-id="@security.Category_id" style="margin-right: 5px;"><ion-icon name="pencil-outline"></ion-icon></a>
+								</td>
+					*@
+								<td>
+									<a class="btn_trash" asp-action="DeleteCategory" asp-route-id="@security.Category_id"><ion-icon name="trash-outline"></ion-icon></a>
+								</td>
+							</tr>
+						}
+						else
+						{
+							// Mismo valor en la columna Function
+							var rowColorClass = GetColorClass(rowIndex);
 
-            foreach (var security in Model)
-            {
-                if (currentFunction == null || currentFunction != security.Function_name)
-                {
-                    // Nuevo valor en la columna Function
-                    currentFunction = security.Function_name;
-                    rowIndex++;
-                    var rowColorClass = GetColorClass(rowIndex);
+							<tr class="@rowColorClass">
+								<td>
+									@if (Model != null && Model.Any())
+									{
+										<a class="elemento" asp-action="Subcategory" asp-route-id="@security.Category_id" style="margin-right: 5px;">@security.Category_name</a>
+									}
+									else
+									{
+										<a class="elemento" asp-action="CreateSubCategory" asp-route-id="@security.Category_id" style="margin-right: 5px;">@security.Category_name</a>
+									}
+								</td>
+								<td>
+									@security.Category_identifier
+								</td>
+								<td>
+									@security.Result
+								</td>
 
-                    <tr class="@rowColorClass">
-                        <td rowspan="@Model.Count(s => s.Function_name == currentFunction)" class="CenterTextRowSpan">
-                            @currentFunction
-                        </td>
-                        <td>
-                            @if (Model != null && Model.Any())
-                            {
-                                <a class="elemento" asp-action="Subcategory" asp-route-id="@security.Category_id" style="margin-right: 5px;">@security.Category_name</a>
-                            }
-                            else
-                            {
-                                <a class="elemento" asp-action="CreateSubCategory" asp-route-id="@security.Category_id" style="margin-right: 5px;">@security.Category_name</a>
-                            }
-                        </td>
-                        <td>
-                            @security.Category_identifier
-                        </td>
-                        <td>
-                            @security.Result
-                        </td>
-                        <td rowspan="@Model.Count(s => s.Function_name == currentFunction)" class="CenterTextRowSpan">
-                            @security.ResultFunction
-                        </td>
-                        @*
-                        <td>
-                            <a class="btn btn-dark" asp-action="EditLocation" asp-route-id="@security.Category_id" style="margin-right: 5px;"><ion-icon name="pencil-outline"></ion-icon></a>
-                        </td>
-            *@
-                        <td>
-                            <a class="btn btn-dark" asp-action="DeleteCategory" asp-route-id="@security.Category_id"><ion-icon name="trash-outline"></ion-icon></a>
-                        </td>
-                    </tr>
-                }
-                else
-                {
-                    // Mismo valor en la columna Function
-                    var rowColorClass = GetColorClass(rowIndex);
-
-                    <tr class="@rowColorClass">
-                        <td>
-                            @if (Model != null && Model.Any())
-                            {
-                                <a class="elemento" asp-action="Subcategory" asp-route-id="@security.Category_id" style="margin-right: 5px;">@security.Category_name</a>
-                            }
-                            else
-                            {
-                                <a class="elemento" asp-action="CreateSubCategory" asp-route-id="@security.Category_id" style="margin-right: 5px;">@security.Category_name</a>
-                            }
-                        </td>
-                        <td>
-                            @security.Category_identifier
-                        </td>
-                        <td>
-                            @security.Result
-                        </td>
-
-                        <td>
-                            <a class="btn btn-dark" asp-action="DeleteCategory" asp-route-id="@security.Category_id"><ion-icon name="trash-outline"></ion-icon></a>
-                        </td>
-                    </tr>
-                }
-            }
-        }
-    </tbody>
-</table>
+								<td>
+									<a class="btn_trash" asp-action="DeleteCategory" asp-route-id="@security.Category_id"><ion-icon name="trash-outline"></ion-icon></a>
+								</td>
+							</tr>
+						}
+					}
+				}
+			</tbody>
+		</table>
 
 @functions {
     // Función para obtener la clase de color según el índice
@@ -170,5 +123,6 @@
         }
     }
 }
+<script src="/js/Layout.js"></script>
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
