@@ -1,0 +1,86 @@
+﻿﻿
+@model IEnumerable<NMEX_Manufacturing_KPIs.Models.Module_User.Users>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml"; // Establece el diseño diferent
+    ViewData["Title"] = "Users";
+    int i = 1;
+}
+<h1 style="margin-top: 25px;">NMEX Manufacturing KPIs \ Users</h1>
+<br />
+<a asp-action="Register" class="btn btn-dark">New record</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>First Name</th>
+            <th>Last Name Paternal</th>
+            <th>Last Name Maternal</th>
+            <th>Email</th>
+            <th>Plant</th>
+            <th>Password</th>
+            <th>Id User Nissan</th>
+            <th>Privilege</th>
+            <th>Active</th>
+            <th>Accions</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var recordUser in Model)
+        {
+            <tr>
+                <td>
+                    @i
+                </td>
+                <td>
+                    @recordUser.FirstName
+                </td>
+                <td>
+                    @recordUser.LastNamePaternal
+                </td>
+                <td>
+                    @recordUser.LastNameMaternal
+                </td>
+                <td>
+                    @recordUser.Email
+                </td>
+                <td>
+                    @recordUser.Plant
+                </td>
+                <td>
+                    @recordUser.Password
+                </td> 
+                <td>
+                    @recordUser.IdUserNissan
+                </td>
+
+                @if (@recordUser.Privilege == true)
+                {
+                    <td>
+                        Admin
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        Viewer
+                    </td>
+                }
+                
+                <td>
+                    @recordUser.Active
+                </td>
+                <td>
+                    <div style="display: flex;">
+                        <a class="btn_trash" asp-action="DeleteUser" asp-route-id="@recordUser.User_id" style="margin-right: 5px;"><ion-icon name="trash-outline"></ion-icon></a>
+                        <a class="btn_trash" asp-action="EditUser" asp-route-id="@recordUser.User_id"><ion-icon name="pencil-outline"></ion-icon></a>
+                    </div>
+                </td>
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

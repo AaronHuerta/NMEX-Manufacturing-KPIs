@@ -4,49 +4,113 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - NMEX_Manufacturing_KPIs</title>
+    <link rel="stylesheet" href="~/css/Layout.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/NMEX_Manufacturing_KPIs.styles.css" asp-append-version="true" />
+
+    <!--Box Icons-->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">NMEX_Manufacturing_KPIs</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Inventory" asp-action="Index">Prueba</a>
-                        </li> 
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
+
+    <nav class="sidebar close">
+        <header>
+            <div class="image-text">
+                <span class="image">
+                    <img src="/Asset/login_icon-removebg-preview.png" alt="logo"/>
+                </span>
+
+                <div class="text header-text">
+                    <span class="name">
+                        Emilio Saldaña
+                    </span>
+                    <span class="profession">
+                        EmilioSaldanaSalinas<br />nissan.com.mx
+                    </span>
                 </div>
             </div>
-        </nav>
-    </header>
+            <i class='bx bx-chevron-right toggle'></i>
+        </header>
+
+        <div class="menu-bar">
+            <div class="menu">
+                <li class="nav-item">
+                    <a class="#" asp-area="" asp-controller="Inventory" asp-action="Index">
+					 <i class="bx bxs-archive-out icon"></i>
+					<span class="text nav-text">Inventory</span>
+					</a>
+                </li>
+                <li class="nav-item">
+                    <a class="#" asp-area="" asp-controller="Security" asp-action="Index">
+					<i class='bx bx-lock-alt icon'></i>
+					<span class="text nav-text">Security</span>
+					</a>
+                </li>
+				<li class="nav-item">
+                    <a class="#" asp-area="" asp-controller="Network" asp-action="Index">
+					<i class='bx bx-signal-5 icon'></i>
+					<span class="text nav-text">Network</span>
+					</a>
+                </li>
+				<li class="nav-item">
+                    <a class="#" asp-area="" asp-controller="AgingHardware" asp-action="Index">
+					<i class='bx bx-hdd icon'></i>
+					<span class="text nav-text">Hardware</span>
+					</a>
+                </li>
+				<li class="nav-item">
+                    <a class="#" asp-area="" asp-controller="AgingSoftware" asp-action="Index">
+					<i class='bx bxl-microsoft icon'></i>
+					<span class="text nav-text">Software</span>
+					</a>
+                </li>
+                @* ADMIN USER *@
+                <li class="nav-item">
+                    <a class="text nav-text" asp-area="" asp-controller="Users" asp-action="Index">
+                    <i class='bx bxl-microsoft icon'></i>
+                    <span class="text nav-text">Users</span>
+                    </a>
+                </li>
+                <partial name="_LinksLogin" />
+            </div>
+            <div class="botton-content">
+                <li class="">
+                    <a href="#">
+                        <i class="bx bx-log-out icon"></i>
+                        <span class="text nav-text">Logout</span>
+                    </a>
+                </li>
+                <li class="mode">
+
+                    <div class="moon-sun">
+                        <i class="bx bx-moon icon moon"></i>
+                        <i class="bx bx-sun icon sun"></i>
+                    </div>
+                    <span class="mode-text text">Dark Mode</span>
+
+
+                    <div class="toggle-switch">
+                        <span class="switch"></span>
+                    </div>
+                </li>
+            </div>
+        </div>
+    </nav>
+
+   
+       
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
     </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - NMEX_Manufacturing_KPIs - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="/js/Layout.js"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

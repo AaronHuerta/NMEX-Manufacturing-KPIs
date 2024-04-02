@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tTP+A4FkNMyIoStrzEb7khJae+PIvLOHztLTx7KkiP1yvib898HITnWuAQvvxkWcVhKaVKuzGIstv1c0ZTQmLw==",
+  "dgSpecHash": "v1u0MyCXP/QsLFygXb2eI70/MG3EytWgIWoPprniq3gPgkMw7AA0zs2WuoskEi3TEIqU2CK6NRcG1lYMkdba4Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Aaron\\source\\repos\\NMEX Manufacturing KPIs\\NMEX Manufacturing KPIs\\NMEX Manufacturing KPIs.csproj",
+  "projectFilePath": "C:\\Users\\Aaron\\source\\repos\\Login\\MainKPI_KPI\\NMEX Manufacturing KPIs\\NMEX Manufacturing KPIs.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Aaron\\.nuget\\packages\\automapper\\13.0.1\\automapper.13.0.1.nupkg.sha512",
     "C:\\Users\\Aaron\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",

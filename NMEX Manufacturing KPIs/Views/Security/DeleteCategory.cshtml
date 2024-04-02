@@ -1,0 +1,14 @@
+﻿@model NMEX_Manufacturing_KPIs.Models.Module_Security.Categories
+
+@{
+    ViewData["Title"] = "Delete Category";
+}
+
+
+<h3 class="mb-3">Are you sure you want to delete the item?</h3>
+
+<form asp-controller="Security" asp-action="DeleteRecordCategory" method="post">
+    <input type="hidden" name="Category_id" asp-for="Category_id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+</form>

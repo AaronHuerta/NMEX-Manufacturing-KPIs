@@ -1,0 +1,128 @@
+﻿@model IEnumerable<NMEX_Manufacturing_KPIs.Models.Module_Security.Categories>
+@{
+    ViewData["Title"] = "Security";
+}
+
+@*<link rel="stylesheet" href="~/css/Layout.css" asp-append-version="true" />*@
+<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<link rel="stylesheet" href="~/css/SecurityIndexView.css" asp-append-version="true" />
+
+
+		<table class="table">
+		
+		
+			<thead>
+				<br />
+				<br />
+				<div class= "Title">
+				<h1> NMEX Manufacturing KPIs \ CyberSecurity <h1/>
+				<a asp-action="CreateCategory" class="btn btn-dark" style="margin-right: 30px;">New Category</a>
+				<div/>
+				<tr>
+					<th>Function</th>
+					<th>Category</th>
+					<th>Category Identifier</th>
+					<th>Calification</th>
+					<th colspan="2">Average</th>
+					
+				</tr>
+			</thead>
+			<tbody>
+				@{
+					string currentFunction = null;
+					int rowIndex = 0;
+
+					foreach (var security in Model)
+					{
+						if (currentFunction == null || currentFunction != security.Function_name)
+						{
+							// Nuevo valor en la columna Function
+							currentFunction = security.Function_name;
+							rowIndex++;
+							var rowColorClass = GetColorClass(rowIndex);
+
+							<tr class="@rowColorClass">
+								<td rowspan="@Model.Count(s => s.Function_name == currentFunction)" class="CenterTextRowSpan">
+									@currentFunction
+								</td>
+								<td>
+									@if (Model != null && Model.Any())
+									{
+										<a class="elemento" asp-action="Subcategory" asp-route-id="@security.Category_id" style="margin-right: 5px;">@security.Category_name</a>
+									}
+									else
+									{
+										<a class="elemento" asp-action="CreateSubCategory" asp-route-id="@security.Category_id" style="margin-right: 5px;">@security.Category_name</a>
+									}
+								</td>
+								<td>
+									@security.Category_identifier
+								</td>
+								<td>
+									@security.Result
+								</td>
+								<td rowspan="@Model.Count(s => s.Function_name == currentFunction)" class="CenterTextRowSpan">
+									@security.ResultFunction
+								</td>
+								@*
+								<td>
+									<a class="btn" asp-action="EditLocation" asp-route-id="@security.Category_id" style="margin-right: 5px;"><ion-icon name="pencil-outline"></ion-icon></a>
+								</td>
+					*@
+								<td>
+									<a class="btn_trash" asp-action="DeleteCategory" asp-route-id="@security.Category_id"><ion-icon name="trash-outline"></ion-icon></a>
+								</td>
+							</tr>
+						}
+						else
+						{
+							// Mismo valor en la columna Function
+							var rowColorClass = GetColorClass(rowIndex);
+
+							<tr class="@rowColorClass">
+								<td>
+									@if (Model != null && Model.Any())
+									{
+										<a class="elemento" asp-action="Subcategory" asp-route-id="@security.Category_id" style="margin-right: 5px;">@security.Category_name</a>
+									}
+									else
+									{
+										<a class="elemento" asp-action="CreateSubCategory" asp-route-id="@security.Category_id" style="margin-right: 5px;">@security.Category_name</a>
+									}
+								</td>
+								<td>
+									@security.Category_identifier
+								</td>
+								<td>
+									@security.Result
+								</td>
+
+								<td>
+									<a class="btn_trash" asp-action="DeleteCategory" asp-route-id="@security.Category_id"><ion-icon name="trash-outline"></ion-icon></a>
+								</td>
+							</tr>
+						}
+					}
+				}
+			</tbody>
+		</table>
+
+@functions {
+    // Función para obtener la clase de color según el índice
+    string GetColorClass(int index)
+    {
+        switch (index % 6)
+        {
+            case 1: return "color1";
+            case 2: return "color2";
+            case 3: return "color3";
+            case 4: return "color4";
+            case 5: return "color5";
+            case 0: return "color6";
+            default: return ""; // En caso de algún error
+        }
+    }
+}
+<script src="/js/Layout.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

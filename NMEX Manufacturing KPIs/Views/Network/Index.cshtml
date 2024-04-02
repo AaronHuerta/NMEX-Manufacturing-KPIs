@@ -1,0 +1,22 @@
+﻿@model IEnumerable<NMEX_Manufacturing_KPIs.Models.Module_Network.Network>
+@{
+    ViewData["Title"] = "Network";
+}
+<h1>Upload Excel file</h1>
+<link rel="stylesheet" href="~/css/NetworkIndexView.css" asp-append-version="true"/>
+
+
+
+<form asp-controller="Network" asp-action="InventoryRecordExcel" enctype="multipart/form-data">
+    <div class="mb-3">
+        <label class="form-label">Excel File</label>
+        <input type="file" name="excelFile" id="excelFile" accept=".xlsx, .xls">
+    </div>
+    <button type="submit" class="btn btn-primary">Send</button>
+    <a class="btn btn-secondary" asp-action="Index">Cancel</a>
+</form>
+	
+
+	
+	
+	
